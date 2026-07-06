@@ -12,41 +12,41 @@
 </head>
 <body>
 <main class="app">
-  <header class="brand"><div><h1>ジャーナンバリング</h1><p>数字で問いを引くジャーナリング</p></div><div class="number-mark">J#</div></header>
+  <header class="brand"><div><h1>ジャーナンバリング</h1><p>数字で一題を引くジャーナリング</p></div><div class="number-mark">J#</div></header>
 
   <section id="home" class="screen active">
     <div class="card home-welcome">
       <div class="eyebrow">WELCOME</div>
       <div class="welcome-copy">
-        <h2>手帳を開く前に、<br>今日の問いをひとつ。</h2>
-        <p class="lead">ジャーナンバリングは、数字で問いを引くための道具です。答えはアプリに書かず、手帳やノートに手書きします。</p>
+        <h2>手帳を開く前に、<br>今日の一題をひとつ。</h2>
+        <p class="lead">ジャーナンバリングは、数字で今日の一題を引くための道具です。答えはアプリに書かず、手帳やノートに手書きします。</p>
       </div>
     </div>
 
     <div class="card home-draw-card">
-      <div class="eyebrow">TODAY'S QUESTION</div><h2>今日はどんな問いがほしい？</h2>
-      <p class="lead">気分に合う問いを出します。しっくりこなければ、何度でも引き直せます。</p>
+      <div class="eyebrow">TODAY'S QUESTION</div><h2>今日はどんな一題がほしい？</h2>
+      <p class="lead">気分に合う一題を出します。しっくりこなければ、何度でも引き直せます。</p>
       <div class="how-to-use-strip" aria-label="使い方">
         <div class="use-step"><span>1</span><strong>気分を選ぶ</strong></div>
         <div class="use-arrow">›</div>
-        <div class="use-step"><span>2</span><strong>問いを引く</strong></div>
+        <div class="use-step"><span>2</span><strong>一題を引く</strong></div>
         <div class="use-arrow">›</div>
         <div class="use-step"><span>3</span><strong>手帳に書く</strong></div>
       </div>
       <div class="mood-grid" id="moodGrid"></div>
-      <button class="primary" id="drawBtn" disabled>問いを引く</button>
+      <button class="primary" id="drawBtn" disabled>一題を引く</button>
       <div id="currentCard" class="current-card hidden"></div>
     </div>
 
     <div class="card library-card">
       <div class="eyebrow">YOUR LIBRARY</div>
-      <h2>問いを使うほど、<br>自分の問い棚が育つ。</h2>
-      <p class="lead">採用した問い、お気に入り、有効な要素をこの端末に記録します。</p>
+      <h2>ジャーナンバリングを使うほど、<br>自分だけのライブラリーが育つ。</h2>
+      <p class="lead">採用した一題、お気に入り、有効な要素をこの端末に記録します。</p>
       <div class="library-stats" id="homeStats"></div>
       <div class="library-notes">
         <div><strong>視点</strong><small>SCAMPERの7視点から出題</small></div>
         <div><strong>要素</strong><small>50個以上の材料を組み合わせる</small></div>
-        <div><strong>番号</strong><small>問い番号で手帳とつながる</small></div>
+        <div><strong>番号</strong><small>一題番号で手帳とつながる</small></div>
       </div>
     </div>
   </section>
@@ -58,30 +58,30 @@
       <div class="eyebrow">TODAY'S QUESTION</div><div class="question" id="questionText"></div>
       <div class="history-note" id="historyNote"></div>
     </div>
-    <button class="accept-btn" id="acceptBtn">この問いに決める</button>
+    <button class="accept-btn" id="acceptBtn">この一題に決める</button>
     <div class="action-grid">
       <button class="sub-btn" id="rerollAll">全部引き直す</button><button class="sub-btn" id="rerollElement">要素だけ変える</button>
       <button class="sub-btn" id="rerollTemplate">問い方だけ変える</button><button class="sub-btn" id="backHome">気分を選び直す</button>
     </div>
-    <div class="meta-actions"><button class="meta-btn" id="favoriteBtn">☆ お気に入り</button><button class="meta-btn" id="ratingBtn">この問いを評価</button></div>
+    <div class="meta-actions"><button class="meta-btn" id="favoriteBtn">☆ お気に入り</button><button class="meta-btn" id="ratingBtn">この一題を評価</button></div>
   </section>
 
   <section id="history" class="screen">
-    <div class="section-title"><div><div class="eyebrow">HISTORY</div><h2>問いの履歴</h2></div></div>
+    <div class="section-title"><div><div class="eyebrow">HISTORY</div><h2>一題の履歴</h2></div></div>
     <div class="toolbar">
-      <button class="filter-btn active" data-filter="accepted">採用した問い</button><button class="filter-btn" data-filter="all">すべての出題</button>
+      <button class="filter-btn active" data-filter="accepted">採用した一題</button><button class="filter-btn" data-filter="all">すべての出題</button>
       <button class="filter-btn" data-filter="favorite">お気に入り</button><button class="filter-btn" data-filter="good">よかった</button>
     </div>
     <div class="history-search">
       <span aria-hidden="true">⌕</span>
-      <input id="historySearch" type="search" placeholder="問い番号・言葉で検索　例：C-36-04 / 退屈" autocomplete="off">
+      <input id="historySearch" type="search" placeholder="一題番号・言葉で検索　例：C-36-04 / 退屈" autocomplete="off">
       <button id="clearHistorySearch" type="button" aria-label="検索を消す">×</button>
     </div>
     <div class="history-list" id="historyList"></div>
   </section>
 
   <section id="materials" class="screen">
-    <div class="section-title"><div><div class="eyebrow">MATERIALS</div><h2>問いの材料</h2></div></div>
+    <div class="section-title"><div><div class="eyebrow">MATERIALS</div><h2>一題の材料</h2></div></div>
     <p class="lead">「要素」と「問い方」を自分向けに育てられます。OFFにした材料は出題されません。</p>
     <div class="tabbar"><button class="tab-btn active" data-tab="elements">要素</button><button class="tab-btn" data-tab="templates">問い方</button></div>
     <div id="elementsPane"><div class="element-list" id="elementList"></div></div>
@@ -91,10 +91,10 @@
   <section id="settings" class="screen">
     <div class="section-title"><div><div class="eyebrow">SETTINGS</div><h2>設定</h2></div></div>
     <div class="settings-grid">
-      <button class="settings-btn" id="helpBtn">使い方・SCAMPERについて<small>問いの引き方、手帳への書き方、7つの視点を確認</small></button>
+      <button class="settings-btn" id="helpBtn">使い方・SCAMPERについて<small>一題の引き方、手帳への書き方、7つの視点を確認</small></button>
       <button class="settings-btn" id="exportBtn">バックアップを保存<small>履歴・お気に入り・自作材料を丸ごと保存</small></button>
       <button class="settings-btn" id="importBtn">バックアップから復元<small>以前保存したバックアップファイルを読み込む</small></button>
-      <button class="settings-btn" id="exportTextBtn">問いの履歴をテキスト保存<small>採用した問いとお気に入りを読みやすい .txt 形式で保存</small></button>
+      <button class="settings-btn" id="exportTextBtn">出題の履歴をテキスト保存<small>採用した一題とお気に入りを読みやすい .txt 形式で保存</small></button>
       <button class="settings-btn danger" id="resetBtn">すべてのデータを削除<small>この端末に保存された履歴と設定を消します</small></button>
     </div>
     <input type="file" id="importFile" accept="application/json,.json" hidden>
@@ -110,12 +110,12 @@
 
 <dialog id="elementDialog"><div class="dialog-body"><h2>要素を追加</h2><form id="elementForm">
   <div class="field"><label for="elementName">要素名</label><input id="elementName" required maxlength="40" placeholder="例：料理"></div>
-  <div class="field"><label for="elementType">種類</label><select id="elementType" required></select><div class="hint">種類は、意味が通りにくい問いを減らすために使います。</div></div>
+  <div class="field"><label for="elementType">種類</label><select id="elementType" required></select><div class="hint">種類は、意味が通りにくい問い方を減らすために使います。</div></div>
   <div class="dialog-actions"><button type="button" class="ghost" data-close="elementDialog">キャンセル</button><button type="submit" class="primary" style="margin-top:0">追加する</button></div>
 </form></div></dialog>
 
 <dialog id="templateDialog"><div class="dialog-body"><h2>問い方を追加</h2><form id="templateForm">
-  <div class="field"><label for="templateName">名前</label><input id="templateName" required maxlength="40" placeholder="例：note化する問い"></div>
+  <div class="field"><label for="templateName">名前</label><input id="templateName" required maxlength="40" placeholder="例：note化する一題"></div>
   <div class="field"><label for="templateView">視点</label><select id="templateView" required></select></div>
   <div class="field"><label for="templateCategory">気分</label><select id="templateCategory" required><option value="any">おまかせ</option><option value="light">軽く書きたい</option><option value="care">気持ちを整理したい</option><option value="idea">ネタがほしい</option><option value="deep">じっくり考えたい</option></select></div>
   <div class="field"><label for="templateType">相性のよい要素種類</label><select id="templateType" required><option value="all">すべて</option></select></div>
@@ -124,10 +124,10 @@
 </form></div></dialog>
 
 <dialog id="helpDialog"><div class="dialog-body"><h2>ジャーナンバリングの使い方</h2>
-  <div class="guide-section"><h3>このアプリは「書く場所」ではありません</h3><p>ジャーナンバリングは、手帳やノートに手書きするための<strong>問い出題ツール</strong>です。回答本文はアプリに保存しません。</p><div class="guide-note">問いを引く → 問い番号を手帳に書く → 自分の言葉で自由に書く。</div></div>
-  <div class="guide-section"><h3>基本の使い方</h3><ol><li>ホームで「軽く書きたい」「ネタがほしい」など、今ほしい問いを選びます。</li><li>「問いを引く」を押します。</li><li>しっくりこなければ、「要素だけ変える」「問い方だけ変える」「全部引き直す」を使います。</li><li>書きたい問いが出たら「この問いに決める」を押し、手帳やノートに書きます。</li></ol><div class="guide-note">問いは1日に何度でも引いて、何問でも採用できます。書くことで整う日も、アイデアが次々に出る日もあります。回数に決まりはありません。</div></div>
-  <div class="guide-section"><h3>問い番号とは</h3><p>たとえば <strong>C-36-04</strong> は、「C＝組み合わせる」「36＝要素番号」「04＝問い方番号」を表します。</p><div class="guide-note">手帳の例：<br>2026.7.5　C-36-04<br>退屈とは……</div><p>同じ問いが再登場したとき、履歴の日付と問い番号を手がかりに、以前の手帳を見返せます。</p></div>
-  <div class="guide-section"><h3>SCAMPERとは</h3><p>SCAMPERは、ひとつのテーマを7つの違う角度から見直す発想法です。ジャーナンバリングでは、この7視点を問い生成の土台にしています。内省向けの問いでは、意味が自然になるように問い方を柔らかく調整しています。</p>
+  <div class="guide-section"><h3>このアプリは「書く場所」ではありません</h3><p>ジャーナンバリングは、手帳やノートに手書きするための<strong>一題出題ツール</strong>です。回答本文はアプリに保存しません。</p><div class="guide-note">一題を引く → 一題番号を手帳に書く → 自分の言葉で自由に書く。</div></div>
+  <div class="guide-section"><h3>基本の使い方</h3><ol><li>ホームで「軽く書きたい」「ネタがほしい」など、今ほしい一題を選びます。</li><li>「一題を引く」を押します。</li><li>しっくりこなければ、「要素だけ変える」「問い方だけ変える」「全部引き直す」を使います。</li><li>書きたい一題が出たら「この一題に決める」を押し、手帳やノートに書きます。</li></ol><div class="guide-note">一題は1日に何度でも引いて、何問でも採用できます。書くことで整う日も、アイデアが次々に出る日もあります。回数に決まりはありません。</div></div>
+  <div class="guide-section"><h3>一題番号とは</h3><p>たとえば <strong>C-36-04</strong> は、「C＝組み合わせる」「36＝要素番号」「04＝一題番号」を表します。</p><div class="guide-note">手帳の例：<br>2026.7.5　C-36-04<br>退屈とは……</div><p>同じ一題が再登場したとき、履歴の日付と一題番号を手がかりに、以前の手帳を見返せます。</p></div>
+  <div class="guide-section"><h3>SCAMPERとは</h3><p>SCAMPERは、ひとつのテーマを7つの違う角度から見直す発想法です。ジャーナンバリングでは、この7視点を一題生成の土台にしています。内省向けの一題では、意味が自然になるように問い方を柔らかく調整しています。</p>
     <div class="scamper-list">
       <div class="scamper-row"><div class="scamper-code">S</div><div><strong>Substitute｜置き換える</strong><small>別のもの・方法・言葉に替えたらどうなるか。</small></div></div>
       <div class="scamper-row"><div class="scamper-code">C</div><div><strong>Combine｜組み合わせる</strong><small>他のものや経験と混ぜたら何が生まれるか。</small></div></div>
@@ -138,11 +138,11 @@
       <div class="scamper-row"><div class="scamper-code">R</div><div><strong>Reverse / Rearrange｜逆にする・並べ替える</strong><small>順番、立場、前提を逆から見たら何が見えるか。</small></div></div>
     </div>
   </div>
-  <div class="guide-section"><h3>問いが気に入らないとき</h3><p>遠慮なく引き直してください。このアプリは「出た問いに必ず答える」ためのものではありません。書きたくなる問いを探すための道具です。</p></div>
+  <div class="guide-section"><h3>一題が気に入らないとき</h3><p>遠慮なく引き直してください。このアプリは「出た一題に必ず答える」ためのものではありません。書きたくなる一題を探すための道具です。</p></div>
   <div class="dialog-actions"><button class="ghost" data-close="helpDialog">閉じる</button></div>
 </div></dialog>
 
-<dialog id="ratingDialog"><div class="dialog-body"><h2>この問い、どうだった？</h2><p class="lead">評価は「問いそのもの」に保存され、同じ問いが再登場しても引き継がれます。</p><div class="dialog-actions"><button class="ghost" data-rating="good">👍 よかった</button><button class="ghost" data-rating="normal">🙂 ふつう</button><button class="ghost" data-rating="bad">↻ 微妙</button></div><div class="dialog-actions"><button class="ghost" data-rating="clear">評価を外す</button><button class="ghost" data-close="ratingDialog">閉じる</button></div></div></dialog>
+<dialog id="ratingDialog"><div class="dialog-body"><h2>この一題、どうだった？</h2><p class="lead">評価は「一題そのもの」に保存され、同じ一題が再登場しても引き継がれます。</p><div class="dialog-actions"><button class="ghost" data-rating="good">👍 よかった</button><button class="ghost" data-rating="normal">🙂 ふつう</button><button class="ghost" data-rating="bad">↻ 微妙</button></div><div class="dialog-actions"><button class="ghost" data-rating="clear">評価を外す</button><button class="ghost" data-close="ratingDialog">閉じる</button></div></div></dialog>
 
 <script>
 (function (root, factory) {
@@ -154,7 +154,7 @@
 
   const MOODS = [
     { id: 'any', label: 'おまかせ', help: '内省も発想も、ごちゃまぜ' },
-    { id: 'light', label: '軽く書きたい', help: '一言でも答えやすい問い' },
+    { id: 'light', label: '軽く書きたい', help: '一言でも答えやすい一題' },
     { id: 'care', label: '気持ちを整理したい', help: '感情や自分の状態を見る' },
     { id: 'idea', label: 'ネタがほしい', help: '創作・企画・記事の種を探す' },
     { id: 'deep', label: 'じっくり考えたい', help: '価値観や人生を少し深掘り' }
@@ -340,7 +340,7 @@
       if (!pairs.length && preferMood) {
         for (const v of VIEWS) for (const el of enabledElements) if (hasAnyTemplate(v.id, el)) pairs.push({ viewId: v.id, elementId: el.id });
       }
-      if (!pairs.length) throw new Error('現在の材料では問いを作れません');
+      if (!pairs.length) throw new Error('現在の材料では一題を作れません');
       const pair = randomItem(pairs, rng);
       viewId = pair.viewId;
       elementId = pair.elementId;
@@ -520,7 +520,7 @@ function renderCurrentCard() {
   const record = getCurrentRecord();
   if (!record) { box.classList.add('hidden'); box.innerHTML=''; return; }
   box.classList.remove('hidden');
-  box.innerHTML = `<div class="eyebrow">CURRENT QUESTION</div><strong>${escapeHtml(record.questionNumber)} ${record.acceptedAt?'・採用済み':'・選び途中'}</strong><div class="hint">${escapeHtml(record.text)}</div><button id="returnQuestion">問いに戻る</button>`;
+  box.innerHTML = `<div class="eyebrow">CURRENT QUESTION</div><strong>${escapeHtml(record.questionNumber)} ${record.acceptedAt?'・採用済み':'・選び途中'}</strong><div class="hint">${escapeHtml(record.text)}</div><button id="returnQuestion">一題に戻る</button>`;
   document.getElementById('returnQuestion').addEventListener('click', () => { renderQuestion(); showScreen('question'); });
 }
 
@@ -532,7 +532,7 @@ function renderHomeStats() {
   const activeElements = state.elements.filter(e => e.enabled).length;
   box.innerHTML = `<div class="hero-mini-label">YOUR LIBRARY</div>
     <div class="hero-stats">
-      <div class="hero-stat"><strong>${acceptedCount}</strong><small>採用した問い</small></div>
+      <div class="hero-stat"><strong>${acceptedCount}</strong><small>採用した一題</small></div>
       <div class="hero-stat"><strong>${favoriteCount}</strong><small>お気に入り</small></div>
       <div class="hero-stat"><strong>${activeElements}</strong><small>有効な要素</small></div>
     </div>`;
@@ -579,13 +579,13 @@ function drawQuestion(mode='all') {
     }
     createOccurrence(question);
     renderQuestion(); renderCurrentCard(); showScreen('question');
-  } catch (error) { alert(error.message || '問いを作れませんでした。'); }
+  } catch (error) { alert(error.message || '一題を作れませんでした。'); }
 }
 
 function renderQuestion() {
   const record = getCurrentRecord(); if (!record) return;
   const view = getView(record.viewId); const element = getElement(record.elementId); const meta = getMeta(record.questionKey);
-  document.getElementById('questionNumber').textContent = `問い番号 ${record.questionNumber}`;
+  document.getElementById('questionNumber').textContent = `一題番号 ${record.questionNumber}`;
   document.getElementById('viewPill').textContent = `視点：${view?.name || record.viewId}`;
   document.getElementById('elementLabel').textContent = `要素 #${String(record.elementId).padStart(2,'0')} ${element?.name || ''}`;
   document.getElementById('questionText').textContent = record.text;
@@ -593,21 +593,21 @@ function renderQuestion() {
   const prev = state.history.filter(h => h.questionKey === record.questionKey && h.id !== record.id);
   const accepted = prev.filter(h => h.acceptedAt);
   const note = document.getElementById('historyNote');
-  if (!prev.length) note.innerHTML = '<strong>この問いは初出です。</strong><br>手帳にそのまま書いても、別の問いを引いてもOK。';
+  if (!prev.length) note.innerHTML = '<strong>この一題は初出です。</strong><br>手帳にそのまま書いても、別の一題を引いてもOK。';
   else {
     const recent = prev.slice(-4).reverse().map(h => formatDate(h.shownAt));
     const acceptedText = accepted.length ? `<br><strong>前回採用：${formatDate(accepted[accepted.length-1].acceptedAt)}</strong>` : '<br>まだ採用されたことはありません。';
-    note.innerHTML = `<strong>この問いは過去に${prev.length}回表示されています。</strong><br>出題日：${recent.join(' / ')}${prev.length>4?' ほか':''}${acceptedText}`;
+    note.innerHTML = `<strong>この一題は過去に${prev.length}回表示されています。</strong><br>出題日：${recent.join(' / ')}${prev.length>4?' ほか':''}${acceptedText}`;
   }
 
   const acceptBtn = document.getElementById('acceptBtn');
   acceptBtn.classList.toggle('accepted', !!record.acceptedAt);
-  acceptBtn.textContent = record.acceptedAt ? `✓ 今日の問いに決定済み（${record.questionNumber}）` : 'この問いに決める';
+  acceptBtn.textContent = record.acceptedAt ? `✓ 今日の一題に決定済み（${record.questionNumber}）` : 'この一題に決める';
 
   const fav = document.getElementById('favoriteBtn');
   fav.classList.toggle('active', !!meta.favorite); fav.textContent = meta.favorite ? '★ お気に入り済み' : '☆ お気に入り';
   const ratingLabels = {good:'👍 よかった',normal:'🙂 ふつう',bad:'↻ 微妙'};
-  document.getElementById('ratingBtn').textContent = meta.rating ? `${ratingLabels[meta.rating]}・再評価` : 'この問いを評価';
+  document.getElementById('ratingBtn').textContent = meta.rating ? `${ratingLabels[meta.rating]}・再評価` : 'この一題を評価';
 }
 
 function showScreen(id) {
@@ -642,11 +642,11 @@ function renderHistory() {
   });
 
   const list = document.getElementById('historyList');
-  if (!items.length) { list.innerHTML='<div class="empty">まだ該当する問いがありません。</div>'; return; }
+  if (!items.length) { list.innerHTML='<div class="empty">まだ該当する一題がありません。</div>'; return; }
   list.innerHTML = items.map(item => {
     const view=getView(item.viewId), meta=getMeta(item.questionKey);
     const rating = meta.rating==='good'?'👍 よかった':meta.rating==='normal'?'🙂 ふつう':meta.rating==='bad'?'↻ 微妙':'';
-    return `<article class="history-item"><div class="date">${formatDate(item.acceptedAt || item.shownAt,true)}${item.acceptedAt?' ・ 採用':' ・ 表示'}</div><div class="qno">${escapeHtml(item.questionNumber)}</div><div class="text">${escapeHtml(item.text)}</div><div class="chips"><span class="tiny">${escapeHtml(view?.name || item.viewId)}</span>${meta.favorite?'<span class="tiny">★ お気に入り</span>':''}${rating?`<span class="tiny">${rating}</span>`:''}</div><div class="history-actions"><button class="history-action-btn ${meta.favorite?'active':''}" data-history-favorite="${escapeHtml(item.questionKey)}">${meta.favorite?'★ お気に入りを外す':'☆ お気に入り'}</button><button class="history-action-btn" data-history-rating="${escapeHtml(item.questionKey)}">${meta.rating?'問いを再評価':'問いを評価'}</button></div></article>`;
+    return `<article class="history-item"><div class="date">${formatDate(item.acceptedAt || item.shownAt,true)}${item.acceptedAt?' ・ 採用':' ・ 表示'}</div><div class="qno">${escapeHtml(item.questionNumber)}</div><div class="text">${escapeHtml(item.text)}</div><div class="chips"><span class="tiny">${escapeHtml(view?.name || item.viewId)}</span>${meta.favorite?'<span class="tiny">★ お気に入り</span>':''}${rating?`<span class="tiny">${rating}</span>`:''}</div><div class="history-actions"><button class="history-action-btn ${meta.favorite?'active':''}" data-history-favorite="${escapeHtml(item.questionKey)}">${meta.favorite?'★ お気に入りを外す':'☆ お気に入り'}</button><button class="history-action-btn" data-history-rating="${escapeHtml(item.questionKey)}">${meta.rating?'一題を再評価':'一題を評価'}</button></div></article>`;
   }).join('');
   list.querySelectorAll('[data-history-favorite]').forEach(btn=>btn.addEventListener('click',()=>{
     const key=btn.dataset.historyFavorite; const meta=getMeta(key); setMeta(key,{favorite:!meta.favorite}); saveState(); renderHistory(); renderCurrentCard();
@@ -704,12 +704,12 @@ function exportHistoryText() {
   const favoriteKeys=Object.entries(state.questionMeta).filter(([,m])=>m?.favorite).map(([key])=>key);
   const favorites=[]; const seen=new Set();
   [...state.history].reverse().forEach(h=>{ if(favoriteKeys.includes(h.questionKey)&&!seen.has(h.questionKey)){seen.add(h.questionKey);favorites.push(h);} });
-  const lines=['ジャーナンバリング 問いの履歴',`出力日：${formatDate(nowIso())}`,''];
-  lines.push('【採用した問い】');
-  if(!accepted.length) lines.push('まだ採用した問いはありません。');
+  const lines=['ジャーナンバリング 一題の履歴',`出力日：${formatDate(nowIso())}`,''];
+  lines.push('【採用した一題】');
+  if(!accepted.length) lines.push('まだ採用した一題はありません。');
   accepted.forEach(h=>{lines.push(`${formatDate(h.acceptedAt)}  ${h.questionNumber}`);lines.push(h.text);lines.push('');});
-  lines.push('【お気に入りの問い】');
-  if(!favorites.length) lines.push('まだお気に入りの問いはありません。');
+  lines.push('【お気に入りの一題】');
+  if(!favorites.length) lines.push('まだお気に入りの一題はありません。');
   favorites.forEach(h=>{lines.push(`${h.questionNumber}`);lines.push(h.text);lines.push('');});
   downloadBlob(lines.join('\r\n'),'text/plain;charset=utf-8',`journumbering-history-${new Date().toISOString().slice(0,10)}.txt`);
 }
