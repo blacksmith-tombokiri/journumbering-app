@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#163b3b">
+  <title>ジャーナンバリング</title>
+  <style>
+:root{--bg:#f4f1e8;--paper:#fffdf7;--ink:#24302e;--muted:#6f7874;--line:#d9d5ca;--accent:#163b3b;--accent2:#d96c4a;--soft:#e8efeb;--shadow:0 14px 40px rgba(31,48,45,.10);--radius:22px}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(circle at top left,rgba(217,108,74,.10),transparent 28rem),linear-gradient(180deg,#f7f4ec,var(--bg));font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.app{width:min(760px,100%);margin:0 auto;padding:18px 16px 104px}.brand{padding:8px 4px 18px;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand h1{margin:0;font-size:clamp(1.45rem,5vw,2rem);letter-spacing:.04em}.brand p{margin:4px 0 0;color:var(--muted);font-size:.9rem}.number-mark{width:52px;height:52px;border-radius:18px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;box-shadow:var(--shadow)}.screen{display:none}.screen.active{display:block;animation:rise .22s ease both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.card,.panel{background:rgba(255,253,247,.94);border:1px solid rgba(217,213,202,.85);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}.eyebrow{font-size:.75rem;font-weight:800;color:var(--accent2);letter-spacing:.12em;text-transform:uppercase}h2{margin:8px 0;font-size:clamp(1.45rem,5vw,2rem);line-height:1.35}.lead{color:var(--muted);margin:0 0 18px;line-height:1.8}.home-welcome{position:relative;overflow:hidden;margin-bottom:14px;background:linear-gradient(145deg,rgba(255,253,247,.98),rgba(245,241,231,.95))}.home-welcome:before{content:"";position:absolute;right:-50px;top:-62px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(217,108,74,.20),rgba(217,108,74,0))}.home-welcome:after{content:"J#";position:absolute;right:24px;bottom:10px;font-size:5.8rem;line-height:1;font-weight:900;letter-spacing:-.08em;color:rgba(22,59,59,.055)}.welcome-copy{position:relative;z-index:1;max-width:560px}.home-welcome h2{margin-top:10px}.home-welcome .lead{max-width:620px;margin-bottom:0}.home-draw-card{margin-bottom:14px;background:rgba(255,253,247,.98);border-color:rgba(22,59,59,.16)}.how-to-use-strip{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:center;margin:18px 0 4px;padding:12px;border-radius:16px;background:linear-gradient(180deg,#f8f4eb,#f2ede3);border:1px solid var(--line)}.use-step{display:flex;align-items:center;gap:9px;min-width:0}.use-step span{width:30px;height:30px;flex:0 0 auto;border-radius:10px;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:.8rem;font-weight:800}.use-step strong{font-size:.84rem;line-height:1.35}.use-arrow{color:var(--accent2);font-size:1.4rem;font-weight:800}.library-card{position:relative;overflow:hidden;background:linear-gradient(145deg,var(--accent),#24514d);color:#fff}.library-card:after{content:"";position:absolute;right:-45px;bottom:-70px;width:190px;height:190px;border-radius:50%;border:28px solid rgba(255,255,255,.035)}.library-card .eyebrow{color:#ffd1c3}.library-card .lead{color:rgba(255,255,255,.72)}.library-stats{position:relative;z-index:1}.hero-mini-label{display:none}.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.hero-stat{padding:15px 10px;border-radius:15px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.13);text-align:center}.hero-stat strong{display:block;font-size:1.35rem;line-height:1.1;margin-bottom:5px}.hero-stat small{font-size:.74rem;opacity:.86}.library-notes{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}.library-notes div{padding:13px 14px;border-radius:15px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.10)}.library-notes strong{display:block;margin-bottom:4px}.library-notes small{display:block;line-height:1.5;color:rgba(255,255,255,.72)}.mood-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}.mood-btn{min-height:64px;padding:12px 14px;border-radius:16px;background:#f2f0e8;color:var(--ink);text-align:left;border:1px solid transparent;transition:.18s;font-weight:700}.mood-btn small{display:block;color:var(--muted);margin-top:4px;font-weight:500}.mood-btn:hover,.mood-btn.selected{background:var(--soft);border-color:var(--accent);transform:translateY(-1px)}.primary{width:100%;min-height:56px;margin-top:16px;border-radius:16px;background:var(--accent);color:#fff;font-weight:800;letter-spacing:.04em;box-shadow:0 10px 24px rgba(22,59,59,.18)}.primary:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}.current-card{margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#faf7ef,#f3eee3)}.current-card strong{display:block;margin:5px 0 8px}.current-card button{width:100%;min-height:44px;border-radius:12px;background:var(--soft);color:var(--accent);font-weight:800}.question-card{min-height:430px;display:flex;flex-direction:column}.question-number{font-size:.84rem;font-weight:800;color:var(--accent2);letter-spacing:.08em;margin-bottom:8px}.question-meta{display:flex;flex-wrap:wrap;gap:8px;color:var(--muted);font-size:.85rem;margin-bottom:15px}.pill{display:inline-flex;align-items:center;min-height:30px;padding:5px 10px;border-radius:999px;background:var(--soft);color:var(--accent);font-size:.8rem;font-weight:800}.question{margin:8px 0 18px;font-size:clamp(1.65rem,6.2vw,2.55rem);line-height:1.55;letter-spacing:.02em;font-weight:800}.history-note{margin-top:auto;padding:14px 16px;background:#f6f3eb;border-radius:15px;color:var(--muted);line-height:1.7;font-size:.9rem}.history-note strong{color:var(--ink)}.accept-btn{width:100%;min-height:58px;margin-top:14px;border-radius:16px;background:var(--accent2);color:#fff;font-weight:800;font-size:1.02rem}.accept-btn.accepted{background:var(--soft);color:var(--accent);border:1px solid var(--accent)}.action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.sub-btn{min-height:48px;border-radius:14px;background:var(--paper);color:var(--ink);border:1px solid var(--line);font-weight:700}.sub-btn:hover{background:var(--soft)}.meta-actions{display:flex;gap:10px;margin-top:10px}.meta-btn{flex:1;min-height:44px;border-radius:14px;background:transparent;color:var(--muted);border:1px solid var(--line)}.meta-btn.active{background:#fff0e9;color:var(--accent2);border-color:#efb49f}.section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}.section-title h2{margin-bottom:0}.plain-btn{background:transparent;color:var(--accent);font-weight:800;padding:8px}.toolbar,.tabbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.filter-btn,.tab-btn{padding:8px 11px;border-radius:999px;background:var(--paper);border:1px solid var(--line);color:var(--muted)}.filter-btn.active,.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}.history-search{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:9px;margin:0 0 12px;padding:10px 12px;border:1px solid var(--line);border-radius:15px;background:var(--paper);box-shadow:0 6px 18px rgba(31,48,45,.05)}.history-search span{color:var(--accent);font-size:1.18rem;font-weight:800}.history-search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);min-width:0}.history-search input::placeholder{color:#9a9f9b}.history-search button{width:32px;height:32px;border-radius:10px;background:#f2f0e8;color:var(--muted);font-weight:800}.history-search button:hover{background:var(--soft);color:var(--accent)}.history-list,.element-list,.template-list{display:grid;gap:10px}.history-item,.element-item,.template-item,.view-group{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:15px}.history-item .date{color:var(--muted);font-size:.78rem;margin-bottom:6px}.history-item .qno{font-size:.76rem;color:var(--accent2);font-weight:800;letter-spacing:.06em;margin-bottom:5px}.history-item .text{line-height:1.7;font-weight:700}.history-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.history-action-btn{min-height:38px;padding:8px 11px;border-radius:11px;background:#f7f4ec;color:var(--accent);border:1px solid var(--line);font-size:.78rem;font-weight:800}.history-action-btn.active{background:#fff0e9;color:var(--accent2);border-color:#efb49f}.guide-section{padding:16px 0;border-top:1px solid var(--line)}.guide-section:first-of-type{border-top:0;padding-top:0}.guide-section h3{margin:0 0 9px;font-size:1.02rem}.guide-section p,.guide-section li{color:var(--muted);line-height:1.8}.guide-section ol,.guide-section ul{padding-left:1.35rem;margin:8px 0}.scamper-list{display:grid;gap:8px;margin-top:12px}.scamper-row{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:start;padding:10px 12px;border-radius:13px;background:#f7f4ec}.scamper-code{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--accent);color:#fff;font-weight:900}.scamper-row strong{display:block;margin-bottom:3px}.scamper-row small{color:var(--muted);line-height:1.55}.guide-note{padding:13px 15px;border-radius:14px;background:var(--soft);color:var(--accent);line-height:1.7;font-weight:700}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.tiny{font-size:.72rem;color:var(--muted);padding:4px 8px;border-radius:999px;background:#f2f0e8}.empty{padding:36px 18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}.element-head,.template-head,.view-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.element-main{display:flex;align-items:center;gap:12px}.element-no{width:38px;height:38px;border-radius:12px;background:var(--soft);display:grid;place-items:center;color:var(--accent);font-weight:800}.element-item h3,.template-item h3{margin:0;font-size:1rem}.element-item p,.template-item p{margin:4px 0 0;color:var(--muted);line-height:1.6;font-size:.86rem}.toggle{position:relative;width:48px;height:28px;flex:0 0 auto}.toggle input{display:none}.toggle span{position:absolute;inset:0;border-radius:999px;background:#c8c7c0;transition:.2s}.toggle span:after{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 2px 6px rgba(0,0,0,.15)}.toggle input:checked+span{background:var(--accent)}.toggle input:checked+span:after{transform:translateX(20px)}.view-group{padding:0;overflow:hidden}.view-head{width:100%;padding:16px;background:transparent;color:var(--ink);text-align:left}.view-head .count{color:var(--muted);font-size:.82rem}.view-body{display:none;padding:0 12px 12px}.view-group.open .view-body{display:grid;gap:8px}.view-group.open .view-head{background:#f7f4ec}.template-item{box-shadow:none}.fab{position:fixed;right:max(18px,calc((100vw - 760px)/2 + 18px));bottom:86px;width:56px;height:56px;border-radius:20px;background:var(--accent2);color:#fff;font-size:1.7rem;box-shadow:0 14px 30px rgba(217,108,74,.28);display:none}.fab.show{display:block}.bottom-nav{position:fixed;z-index:20;left:50%;bottom:10px;transform:translateX(-50%);width:min(728px,calc(100% - 20px));padding:8px;border-radius:22px;background:rgba(255,253,247,.92);border:1px solid rgba(217,213,202,.92);backdrop-filter:blur(18px);box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr)}.nav-btn{background:transparent;color:var(--muted);border-radius:15px;padding:9px 4px;font-size:.75rem;font-weight:800}.nav-btn span{display:block;font-size:1.18rem;margin-bottom:2px}.nav-btn.active{color:var(--accent);background:var(--soft)}dialog{width:min(620px,calc(100% - 24px));border:0;border-radius:22px;padding:0;box-shadow:0 24px 80px rgba(0,0,0,.25);background:var(--paper);color:var(--ink)}dialog::backdrop{background:rgba(25,33,31,.48)}.dialog-body{padding:22px}.dialog-body h2{margin-top:0}.field{display:grid;gap:7px;margin:14px 0}.field label{font-size:.82rem;font-weight:800}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px 13px;background:#fff;color:var(--ink)}.field textarea{resize:vertical;min-height:110px;line-height:1.6}.dialog-actions{display:flex;gap:10px;margin-top:18px}.dialog-actions button{flex:1;min-height:48px;border-radius:14px;font-weight:800}.ghost{background:#f1efe7;color:var(--ink)}.settings-grid{display:grid;gap:10px}.settings-btn{text-align:left;min-height:58px;padding:14px 16px;border-radius:15px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-weight:800}.settings-btn small{display:block;color:var(--muted);margin-top:4px;font-weight:500}.danger{color:#a13b31}.hint{font-size:.82rem;color:var(--muted);line-height:1.65}.success-note{margin-top:12px;padding:12px 14px;background:var(--soft);border-radius:14px;color:var(--accent);font-weight:700}.hidden{display:none!important}@media(max-width:720px){.hero-stats,.library-notes{grid-template-columns:repeat(3,1fr)}}@media(max-width:520px){.card,.panel{padding:18px}.mood-grid{grid-template-columns:1fr}.question-card{min-height:380px}.action-grid{grid-template-columns:1fr}.brand p{font-size:.82rem}.meta-actions{flex-direction:column}.how-to-use-strip{grid-template-columns:1fr auto 1fr auto 1fr;padding:10px 8px;gap:5px}.use-step{display:grid;justify-items:center;text-align:center;gap:6px}.use-step strong{font-size:.72rem}.use-arrow{font-size:1.2rem}.hero-stats,.library-notes{grid-template-columns:repeat(3,1fr)}.hero-stat{padding:12px 6px}.hero-stat strong{font-size:1.15rem}.library-notes div{padding:11px 8px}.library-notes small{font-size:.72rem}.home-welcome:after{font-size:4.8rem;right:18px}}
+
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="brand"><div><h1>ジャーナンバリング</h1><p>数字で問いを引くジャーナリング</p></div><div class="number-mark">J#</div></header>
+
+  <section id="home" class="screen active">
+    <div class="card home-welcome">
+      <div class="eyebrow">WELCOME</div>
+      <div class="welcome-copy">
+        <h2>手帳を開く前に、<br>今日の問いをひとつ。</h2>
+        <p class="lead">ジャーナンバリングは、数字で問いを引くための道具です。答えはアプリに書かず、手帳やノートに手書きします。</p>
+      </div>
+    </div>
+
+    <div class="card home-draw-card">
+      <div class="eyebrow">TODAY'S QUESTION</div><h2>今日はどんな問いがほしい？</h2>
+      <p class="lead">気分に合う問いを出します。しっくりこなければ、何度でも引き直せます。</p>
+      <div class="how-to-use-strip" aria-label="使い方">
+        <div class="use-step"><span>1</span><strong>気分を選ぶ</strong></div>
+        <div class="use-arrow">›</div>
+        <div class="use-step"><span>2</span><strong>問いを引く</strong></div>
+        <div class="use-arrow">›</div>
+        <div class="use-step"><span>3</span><strong>手帳に書く</strong></div>
+      </div>
+      <div class="mood-grid" id="moodGrid"></div>
+      <button class="primary" id="drawBtn" disabled>問いを引く</button>
+      <div id="currentCard" class="current-card hidden"></div>
+    </div>
+
+    <div class="card library-card">
+      <div class="eyebrow">YOUR LIBRARY</div>
+      <h2>問いを使うほど、<br>自分の問い棚が育つ。</h2>
+      <p class="lead">採用した問い、お気に入り、有効な要素をこの端末に記録します。</p>
+      <div class="library-stats" id="homeStats"></div>
+      <div class="library-notes">
+        <div><strong>視点</strong><small>SCAMPERの7視点から出題</small></div>
+        <div><strong>要素</strong><small>50個以上の材料を組み合わせる</small></div>
+        <div><strong>番号</strong><small>問い番号で手帳とつながる</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="question" class="screen">
+    <div class="card question-card">
+      <div class="question-number" id="questionNumber"></div>
+      <div class="question-meta"><span class="pill" id="viewPill"></span><span id="elementLabel"></span></div>
+      <div class="eyebrow">TODAY'S QUESTION</div><div class="question" id="questionText"></div>
+      <div class="history-note" id="historyNote"></div>
+    </div>
+    <button class="accept-btn" id="acceptBtn">この問いに決める</button>
+    <div class="action-grid">
+      <button class="sub-btn" id="rerollAll">全部引き直す</button><button class="sub-btn" id="rerollElement">要素だけ変える</button>
+      <button class="sub-btn" id="rerollTemplate">問い方だけ変える</button><button class="sub-btn" id="backHome">気分を選び直す</button>
+    </div>
+    <div class="meta-actions"><button class="meta-btn" id="favoriteBtn">☆ お気に入り</button><button class="meta-btn" id="ratingBtn">この問いを評価</button></div>
+  </section>
+
+  <section id="history" class="screen">
+    <div class="section-title"><div><div class="eyebrow">HISTORY</div><h2>問いの履歴</h2></div></div>
+    <div class="toolbar">
+      <button class="filter-btn active" data-filter="accepted">採用した問い</button><button class="filter-btn" data-filter="all">すべての出題</button>
+      <button class="filter-btn" data-filter="favorite">お気に入り</button><button class="filter-btn" data-filter="good">よかった</button>
+    </div>
+    <div class="history-search">
+      <span aria-hidden="true">⌕</span>
+      <input id="historySearch" type="search" placeholder="問い番号・言葉で検索　例：C-36-04 / 退屈" autocomplete="off">
+      <button id="clearHistorySearch" type="button" aria-label="検索を消す">×</button>
+    </div>
+    <div class="history-list" id="historyList"></div>
+  </section>
+
+  <section id="materials" class="screen">
+    <div class="section-title"><div><div class="eyebrow">MATERIALS</div><h2>問いの材料</h2></div></div>
+    <p class="lead">「要素」と「問い方」を自分向けに育てられます。OFFにした材料は出題されません。</p>
+    <div class="tabbar"><button class="tab-btn active" data-tab="elements">要素</button><button class="tab-btn" data-tab="templates">問い方</button></div>
+    <div id="elementsPane"><div class="element-list" id="elementList"></div></div>
+    <div id="templatesPane" class="hidden"><div class="template-list" id="templateList"></div></div>
+  </section>
+
+  <section id="settings" class="screen">
+    <div class="section-title"><div><div class="eyebrow">SETTINGS</div><h2>設定</h2></div></div>
+    <div class="settings-grid">
+      <button class="settings-btn" id="helpBtn">使い方・SCAMPERについて<small>問いの引き方、手帳への書き方、7つの視点を確認</small></button>
+      <button class="settings-btn" id="exportBtn">バックアップを保存<small>履歴・お気に入り・自作材料を丸ごと保存</small></button>
+      <button class="settings-btn" id="importBtn">バックアップから復元<small>以前保存したバックアップファイルを読み込む</small></button>
+      <button class="settings-btn" id="exportTextBtn">問いの履歴をテキスト保存<small>採用した問いとお気に入りを読みやすい .txt 形式で保存</small></button>
+      <button class="settings-btn danger" id="resetBtn">すべてのデータを削除<small>この端末に保存された履歴と設定を消します</small></button>
+    </div>
+    <input type="file" id="importFile" accept="application/json,.json" hidden>
+  </section>
+
+  <button class="fab" id="addMaterialBtn" aria-label="材料を追加">＋</button>
+</main>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-screen="home"><span>⌂</span>ホーム</button><button class="nav-btn" data-screen="history"><span>◷</span>履歴</button>
+  <button class="nav-btn" data-screen="materials"><span>▦</span>材料</button><button class="nav-btn" data-screen="settings"><span>⚙</span>設定</button>
+</nav>
+
+<dialog id="elementDialog"><div class="dialog-body"><h2>要素を追加</h2><form id="elementForm">
+  <div class="field"><label for="elementName">要素名</label><input id="elementName" required maxlength="40" placeholder="例：料理"></div>
+  <div class="field"><label for="elementType">種類</label><select id="elementType" required></select><div class="hint">種類は、意味が通りにくい問いを減らすために使います。</div></div>
+  <div class="dialog-actions"><button type="button" class="ghost" data-close="elementDialog">キャンセル</button><button type="submit" class="primary" style="margin-top:0">追加する</button></div>
+</form></div></dialog>
+
+<dialog id="templateDialog"><div class="dialog-body"><h2>問い方を追加</h2><form id="templateForm">
+  <div class="field"><label for="templateName">名前</label><input id="templateName" required maxlength="40" placeholder="例：note化する問い"></div>
+  <div class="field"><label for="templateView">視点</label><select id="templateView" required></select></div>
+  <div class="field"><label for="templateCategory">気分</label><select id="templateCategory" required><option value="any">おまかせ</option><option value="light">軽く書きたい</option><option value="care">気持ちを整理したい</option><option value="idea">ネタがほしい</option><option value="deep">じっくり考えたい</option></select></div>
+  <div class="field"><label for="templateType">相性のよい要素種類</label><select id="templateType" required><option value="all">すべて</option></select></div>
+  <div class="field"><label for="templateText">質問文</label><textarea id="templateText" required placeholder="「{要素}」を別の角度から見るなら？"></textarea></div>
+  <div class="dialog-actions"><button type="button" class="ghost" data-close="templateDialog">キャンセル</button><button type="submit" class="primary" style="margin-top:0">追加する</button></div>
+</form></div></dialog>
+
+<dialog id="helpDialog"><div class="dialog-body"><h2>ジャーナンバリングの使い方</h2>
+  <div class="guide-section"><h3>このアプリは「書く場所」ではありません</h3><p>ジャーナンバリングは、手帳やノートに手書きするための<strong>問い出題ツール</strong>です。回答本文はアプリに保存しません。</p><div class="guide-note">問いを引く → 問い番号を手帳に書く → 自分の言葉で自由に書く。</div></div>
+  <div class="guide-section"><h3>基本の使い方</h3><ol><li>ホームで「軽く書きたい」「ネタがほしい」など、今ほしい問いを選びます。</li><li>「問いを引く」を押します。</li><li>しっくりこなければ、「要素だけ変える」「問い方だけ変える」「全部引き直す」を使います。</li><li>書きたい問いが出たら「この問いに決める」を押し、手帳やノートに書きます。</li></ol><div class="guide-note">問いは1日に何度でも引いて、何問でも採用できます。書くことで整う日も、アイデアが次々に出る日もあります。回数に決まりはありません。</div></div>
+  <div class="guide-section"><h3>問い番号とは</h3><p>たとえば <strong>C-36-04</strong> は、「C＝組み合わせる」「36＝要素番号」「04＝問い方番号」を表します。</p><div class="guide-note">手帳の例：<br>2026.7.5　C-36-04<br>退屈とは……</div><p>同じ問いが再登場したとき、履歴の日付と問い番号を手がかりに、以前の手帳を見返せます。</p></div>
+  <div class="guide-section"><h3>SCAMPERとは</h3><p>SCAMPERは、ひとつのテーマを7つの違う角度から見直す発想法です。ジャーナンバリングでは、この7視点を問い生成の土台にしています。内省向けの問いでは、意味が自然になるように問い方を柔らかく調整しています。</p>
+    <div class="scamper-list">
+      <div class="scamper-row"><div class="scamper-code">S</div><div><strong>Substitute｜置き換える</strong><small>別のもの・方法・言葉に替えたらどうなるか。</small></div></div>
+      <div class="scamper-row"><div class="scamper-code">C</div><div><strong>Combine｜組み合わせる</strong><small>他のものや経験と混ぜたら何が生まれるか。</small></div></div>
+      <div class="scamper-row"><div class="scamper-code">A</div><div><strong>Adapt｜応用する</strong><small>別の場面の方法や学びを持ってこられないか。</small></div></div>
+      <div class="scamper-row"><div class="scamper-code">M</div><div><strong>Modify｜変える</strong><small>増やす、減らす、形や比重を変えたらどうなるか。</small></div></div>
+      <div class="scamper-row"><div class="scamper-code">P</div><div><strong>Put to other uses｜別の使い道</strong><small>違う目的や場面で使えないか。</small></div></div>
+      <div class="scamper-row"><div class="scamper-code">E</div><div><strong>Eliminate｜減らす・なくす</strong><small>余計なもの、負担、前提を外したらどうなるか。</small></div></div>
+      <div class="scamper-row"><div class="scamper-code">R</div><div><strong>Reverse / Rearrange｜逆にする・並べ替える</strong><small>順番、立場、前提を逆から見たら何が見えるか。</small></div></div>
+    </div>
+  </div>
+  <div class="guide-section"><h3>問いが気に入らないとき</h3><p>遠慮なく引き直してください。このアプリは「出た問いに必ず答える」ためのものではありません。書きたくなる問いを探すための道具です。</p></div>
+  <div class="dialog-actions"><button class="ghost" data-close="helpDialog">閉じる</button></div>
+</div></dialog>
+
+<dialog id="ratingDialog"><div class="dialog-body"><h2>この問い、どうだった？</h2><p class="lead">評価は「問いそのもの」に保存され、同じ問いが再登場しても引き継がれます。</p><div class="dialog-actions"><button class="ghost" data-rating="good">👍 よかった</button><button class="ghost" data-rating="normal">🙂 ふつう</button><button class="ghost" data-rating="bad">↻ 微妙</button></div><div class="dialog-actions"><button class="ghost" data-rating="clear">評価を外す</button><button class="ghost" data-close="ratingDialog">閉じる</button></div></div></dialog>
+
+<script>
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  root.JournalLogic = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+
+  const MOODS = [
+    { id: 'any', label: 'おまかせ', help: '内省も発想も、ごちゃまぜ' },
+    { id: 'light', label: '軽く書きたい', help: '一言でも答えやすい問い' },
+    { id: 'care', label: '気持ちを整理したい', help: '感情や自分の状態を見る' },
+    { id: 'idea', label: 'ネタがほしい', help: '創作・企画・記事の種を探す' },
+    { id: 'deep', label: 'じっくり考えたい', help: '価値観や人生を少し深掘り' }
+  ];
+
+  const VIEWS = [
+    { id: 'S', name: '置き換える', en: 'Substitute' },
+    { id: 'C', name: '組み合わせる', en: 'Combine' },
+    { id: 'A', name: '応用する', en: 'Adapt' },
+    { id: 'M', name: '変えてみる', en: 'Modify' },
+    { id: 'P', name: '別の使い道', en: 'Put to other uses' },
+    { id: 'E', name: '減らしてみる', en: 'Eliminate' },
+    { id: 'R', name: '逆から見る', en: 'Reverse / Rearrange' }
+  ];
+
+  const ELEMENT_TYPES = [
+    { id: 'routine', label: '生活・習慣' },
+    { id: 'creative', label: '創作・発想' },
+    { id: 'activity', label: '仕事・学び' },
+    { id: 'resource', label: 'お金・資源' },
+    { id: 'emotion', label: '感情・状態' },
+    { id: 'self_trait', label: '自分の特徴' },
+    { id: 'self_issue', label: '迷い・課題' },
+    { id: 'self_reflection', label: '自己理解' },
+    { id: 'experience', label: '経験・結果' },
+    { id: 'relation', label: '人間関係' },
+    { id: 'strategy', label: '人生・戦略' },
+    { id: 'topic', label: '関心・テーマ' },
+    { id: 'other', label: 'その他' }
+  ];
+
+  const e = (id, name, type) => ({ id, name, type, enabled: true, builtIn: true });
+  const BUILT_IN_ELEMENTS = [
+    e(1,'朝の過ごし方','routine'), e(2,'夜の過ごし方','routine'), e(3,'睡眠','routine'), e(4,'食事','routine'), e(5,'運動・散歩','routine'),
+    e(6,'体調管理','routine'), e(7,'スマホ時間','routine'), e(8,'情報収集','activity'), e(9,'ニュース','topic'), e(10,'読書','activity'),
+    e(11,'メモ','routine'), e(12,'日記・手帳','routine'), e(13,'文章','creative'), e(14,'言葉づかい','creative'), e(15,'企画','creative'),
+    e(16,'アイデア出し','creative'), e(17,'創作','creative'), e(18,'ゲーム','creative'), e(19,'遊び','creative'), e(20,'趣味','topic'),
+    e(21,'仕事','activity'), e(22,'学び','activity'), e(23,'説明','activity'), e(24,'お金の使い方','resource'), e(25,'稼ぎ方','resource'),
+    e(26,'時間の使い方','routine'), e(27,'部屋・作業環境','routine'), e(28,'持ち物','resource'), e(29,'移動時間','routine'), e(30,'休日','routine'),
+    e(31,'小さな挑戦','experience'), e(32,'先延ばし','self_issue'), e(33,'不安','emotion'), e(34,'怒り・違和感','emotion'), e(35,'楽しかったこと','experience'),
+    e(36,'退屈','emotion'), e(37,'自分の強み','self_trait'), e(38,'苦手なこと','self_issue'), e(39,'失敗','experience'), e(40,'うまくいったこと','experience'),
+    e(41,'友人・知人','relation'), e(42,'初対面の人','relation'), e(43,'家族・身近な人','relation'), e(44,'人との距離感','relation'), e(45,'コミュニティ','relation'),
+    e(46,'ひとりの時間','self_reflection'), e(47,'最近気になったこと','topic'), e(48,'迷っていること','self_issue'), e(49,'理想の自分','self_trait'), e(50,'人生戦略','strategy')
+  ];
+
+  const ALL_TYPES = ELEMENT_TYPES.map(x => x.id);
+  const T = (id, number, name, view, category, text, allowedTypes = ALL_TYPES) => ({
+    id, number, name, view, category, text, allowedTypes, enabled: true, builtIn: true
+  });
+  const mix = (...groups) => [...new Set(groups.flat())];
+  const ROU = ['routine'];
+  const CRE = ['creative'];
+  const ACT = ['activity'];
+  const RES = ['resource'];
+  const EMO = ['emotion'];
+  const TRAIT = ['self_trait'];
+  const ISSUE = ['self_issue'];
+  const REFLECT = ['self_reflection'];
+  const STRAT = ['strategy'];
+  const SELF = mix(TRAIT, ISSUE, REFLECT, STRAT);
+  const EXP = ['experience'];
+  const REL = ['relation'];
+  const TOP = ['topic'];
+
+  const BUILT_IN_TEMPLATES = [
+    T('S1',1,'基本・置き換え','S','any','「{要素}」について、何か1つ置き換えるなら？'),
+    T('S2',2,'軽い置き換え','S','light','今日、「{要素}」を少し楽にするために、何を別のものに替える？',mix(ROU,ACT,RES,CRE,REL)),
+    T('S3',3,'気持ちの置き換え','S','care','「{要素}」について、責める言葉を少し優しい言葉に置き換えるなら？',mix(EMO,ISSUE,REFLECT,EXP,REL,ACT)),
+    T('S4',4,'発想の置き換え','S','idea','「{要素}」の定番を1つ別のものに置き換えたら、何が生まれる？',mix(CRE,ACT,ROU,RES,TOP)),
+    T('S5',5,'前提の置き換え','S','deep','「{要素}」について、自分が当然だと思っている前提を1つ置き換えるなら？',mix(SELF,REL,ACT,RES,ROU,EMO,TOP)),
+
+    T('C1',1,'基本・組み合わせ','C','any','「{要素}」と何か別のものを組み合わせるなら？'),
+    T('C2',2,'今日と組み合わせる','C','light','「{要素}」と今日あった小さな出来事を組み合わせるなら？',mix(ROU,CRE,ACT,RES,EMO,EXP,REL)),
+    T('C3',3,'感情と組み合わせる','C','care','今の気分と「{要素}」を並べてみると、どんな言葉が浮かぶ？',mix(EMO,TRAIT,ISSUE,REFLECT,REL,EXP,ROU,TOP)),
+    T('C4',4,'最近見聞きしたもの','C','idea','「{要素}」と最近見聞きしたものを組み合わせるなら、どんなネタになる？',mix(CRE,ACT,ROU,RES,EXP,EMO,TOP)),
+    T('C5',5,'価値観を組み合わせる','C','deep','「{要素}」と自分が大切にしていることを組み合わせると、何が見える？',mix(SELF,REL,ACT,CRE,RES,EXP,EMO,TOP)),
+
+    T('A1',1,'基本・応用','A','any','「{要素}」で得た気づきを、別の場面に応用するなら？',mix(ROU,CRE,ACT,RES,EXP,REL,EMO,TOP)),
+    T('A2',2,'明日への応用','A','light','今日の「{要素}」で、明日も取り入れたいことは？',mix(ROU,ACT,CRE,EXP)),
+    T('A3',3,'自分を整える応用','A','care','「{要素}」について、以前うまくいった方法を今の自分に応用するなら？',mix(ROU,EMO,REL,ACT,ISSUE,REFLECT,EXP)),
+    T('A4',4,'別ジャンルへの応用','A','idea','「{要素}」の考え方を、まったく別の分野に応用するとしたら？',mix(CRE,ACT,RES,ROU,EXP,TOP)),
+    T('A5',5,'過去から応用','A','deep','過去の自分が「{要素}」から得た学びを、今に応用するなら？',mix(ROU,CRE,ACT,RES,EMO,SELF,EXP,REL,TOP)),
+
+    T('M1',1,'基本・変える','M','any','今日、「{要素}」を少し変える・増やす・減らすなら？',mix(ROU,CRE,ACT,RES,EMO,EXP,REL,TOP)),
+    T('M2',2,'1%だけ変える','M','light','「{要素}」を1%だけ心地よく変えるなら？',mix(ROU,ACT,RES,EMO,CRE,REFLECT,TOP)),
+    T('M3',3,'負担を変える','M','care','「{要素}」の負担を少し軽くするために、何を変えられる？',mix(ROU,ACT,RES,EMO,REL,ISSUE,REFLECT)),
+    T('M4',4,'面白く変える','M','idea','「{要素}」をもっと面白く、奇妙に、または意外に変えるなら？',mix(CRE,ACT,ROU,RES,EXP,EMO,TOP)),
+    T('M5',5,'比重を変える','M','deep','人生の中で「{要素}」の比重を変えるなら、増やす？減らす？なぜ？',mix(ROU,CRE,ACT,RES,EMO,REL,TOP)),
+
+    T('P1',1,'基本・別用途','P','any','「{要素}」に別の使い道を与えるなら？',mix(ROU,CRE,ACT,RES,EXP,TOP)),
+    T('P2',2,'今日の別用途','P','light','今日の「{要素}」を、別の場面で役立てるなら？',mix(ROU,ACT,CRE,EXP,EMO,TOP)),
+    T('P3',3,'感情を素材にする','P','care','「{要素}」について感じたことを、自分を整える材料にするなら？',mix(EMO,ISSUE,REFLECT,REL,EXP)),
+    T('P4',4,'ネタ化する','P','idea','「{要素}」を新しい記事・企画・作品の種に変えるなら、どんな切り口にする？',mix(ROU,CRE,ACT,RES,EMO,SELF,EXP,REL,TOP)),
+    T('P5',5,'経験の再利用','P','deep','「{要素}」に関する過去の経験を、今の人生で別の形に使うなら？',mix(EMO,ISSUE,REFLECT,REL,EXP,ACT,ROU)),
+
+    T('E1',1,'基本・削る','E','any','「{要素}」から何か1つ減らす・捨てるなら？',mix(ROU,CRE,ACT,RES,EMO,ISSUE,REFLECT,STRAT,REL,TOP)),
+    T('E2',2,'今日はやらない','E','light','今日、「{要素}」について1つだけやらなくていいことは？',mix(ROU,ACT,REL,RES,EMO,ISSUE,REFLECT)),
+    T('E3',3,'自分を責めない','E','care','今日、「{要素}」について、自分を責めなくていい部分はどこ？',mix(EMO,ISSUE,REFLECT,REL,EXP,ACT)),
+    T('E4',4,'余計なものを削る','E','idea','「{要素}」から定番や余計なものを1つ削ったら、何が残る？',mix(CRE,ACT,ROU,RES,TOP)),
+    T('E5',5,'手放す前提','E','deep','「{要素}」について、もう手放してもよい考え方はある？',mix(SELF,EMO,REL,ACT,RES,ROU,EXP,TOP)),
+
+    T('R1',1,'基本・逆転','R','any','「{要素}」の視点・順番・前提を逆にするなら？',mix(ROU,CRE,ACT,RES,EMO,SELF,REL,TOP)),
+    T('R2',2,'逆の選択','R','light','「{要素}」について、いつもと逆の小さな選択をするなら？',mix(ROU,ACT,REL,RES,CRE,ISSUE,REFLECT)),
+    T('R3',3,'別の自分から見る','R','care','今の自分ではなく、少し優しい自分から「{要素}」を見ると何が違う？',mix(EMO,ISSUE,REFLECT,REL,EXP,ACT)),
+    T('R4',4,'逆から企画する','R','idea','「{要素}」を逆から考えると、どんな企画やネタが生まれる？',mix(CRE,ACT,ROU,RES,EMO,EXP,TOP)),
+    T('R5',5,'前提逆転','R','deep','「{要素}」について、いつもの前提を逆にすると何が見える？',mix(SELF,REL,ACT,RES,ROU,CRE,EMO,EXP,TOP))
+  ];
+
+  function randomItem(items, rng = Math.random) {
+    if (!items || !items.length) throw new Error('候補がありません');
+    return items[Math.floor(rng() * items.length)];
+  }
+
+  function isCompatible(template, element) {
+    // 「その他」は自由枠。分類に迷う要素も、すべての問い方と組み合わせられる。
+    if (element.type === 'other') return true;
+    return !template.allowedTypes || template.allowedTypes.includes(element.type);
+  }
+
+  function getQuestionNumber(viewId, elementId, templateNumber) {
+    return `${viewId}-${String(elementId).padStart(2, '0')}-${String(templateNumber).padStart(2, '0')}`;
+  }
+
+  function getQuestionKey(viewId, elementId, templateId) {
+    return `${viewId}|${elementId}|${templateId}`;
+  }
+
+  function fillTemplate(text, elementName) {
+    return text.replaceAll('{要素}', elementName);
+  }
+
+  function moodBiasRate(mood) {
+    return mood === 'any' ? 0 : 0.8;
+  }
+
+  function chaosRate(mood) {
+    if (mood === 'care') return 0.02;
+    if (mood === 'light' || mood === 'deep') return 0.04;
+    return 0.10;
+  }
+
+  function pickTemplate({ templates, viewId, element, mood = 'any', rng = Math.random, forceCompatible = false, preferMood = false }) {
+    const enabled = templates.filter(t => t.enabled && t.view === viewId);
+    if (!enabled.length) throw new Error(`視点 ${viewId} の有効な問い方がありません`);
+
+    const compatible = enabled.filter(t => isCompatible(t, element));
+    if (preferMood && mood !== 'any') {
+      const moodMatched = compatible.filter(t => t.category === mood);
+      if (moodMatched.length) return randomItem(moodMatched, rng);
+    }
+
+    const shouldChaos = !forceCompatible && rng() < chaosRate(mood);
+    let pool = shouldChaos ? enabled : (compatible.length ? compatible : enabled);
+    if (mood === 'any') return randomItem(pool, rng);
+
+    const neutral = pool.filter(t => t.category === 'any');
+    if (neutral.length && rng() < 0.6) pool = neutral;
+    return randomItem(pool, rng);
+  }
+
+  function hasMoodTemplate(templates, viewId, element, mood) {
+    return templates.some(t => t.enabled && t.view === viewId && t.category === mood && isCompatible(t, element));
+  }
+
+  function drawQuestion({ state, mode = 'all', rng = Math.random, forceCompatible = false }) {
+    const enabledElements = state.elements.filter(x => x.enabled);
+    if (!enabledElements.length) throw new Error('有効な要素がありません');
+
+    const mood = state.mood || 'any';
+    const preferMood = mood !== 'any' && rng() < moodBiasRate(mood);
+    let viewId = state.current?.viewId;
+    let elementId = state.current?.elementId;
+    let templateId = state.current?.templateId;
+
+    const hasAnyTemplate = (vId, el) => state.templates.some(t => t.enabled && t.view === vId && isCompatible(t, el));
+
+    if (mode === 'all' || !viewId || !elementId) {
+      let pairs = [];
+      for (const v of VIEWS) for (const el of enabledElements) {
+        const ok = preferMood ? hasMoodTemplate(state.templates, v.id, el, mood) : hasAnyTemplate(v.id, el);
+        if (ok) pairs.push({ viewId: v.id, elementId: el.id });
+      }
+      if (!pairs.length && preferMood) {
+        for (const v of VIEWS) for (const el of enabledElements) if (hasAnyTemplate(v.id, el)) pairs.push({ viewId: v.id, elementId: el.id });
+      }
+      if (!pairs.length) throw new Error('現在の材料では問いを作れません');
+      const pair = randomItem(pairs, rng);
+      viewId = pair.viewId;
+      elementId = pair.elementId;
+    } else if (mode === 'element') {
+      let candidates = enabledElements.filter(el => preferMood
+        ? hasMoodTemplate(state.templates, viewId, el, mood)
+        : hasAnyTemplate(viewId, el));
+      if (!candidates.length && preferMood) candidates = enabledElements.filter(el => hasAnyTemplate(viewId, el));
+      if (!candidates.length) throw new Error('この視点で使える要素がありません');
+      elementId = randomItem(candidates, rng).id;
+    }
+
+    const element = state.elements.find(x => x.id === elementId);
+    if (!element || !element.enabled) throw new Error('要素が見つかりません');
+
+    if (mode === 'all' || mode === 'template' || mode === 'element' || !templateId) {
+      templateId = pickTemplate({ templates: state.templates, viewId, element, mood, rng, forceCompatible, preferMood }).id;
+    }
+
+    let template = state.templates.find(t => t.id === templateId);
+    if (!template || !template.enabled || template.view !== viewId || (forceCompatible && !isCompatible(template, element))) {
+      template = pickTemplate({ templates: state.templates, viewId, element, mood, rng, forceCompatible, preferMood });
+      templateId = template.id;
+    }
+
+    const text = fillTemplate(template.text, element.name);
+    const questionKey = getQuestionKey(viewId, elementId, templateId);
+    const questionNumber = getQuestionNumber(viewId, elementId, template.number);
+
+    return { viewId, elementId, templateId, text, questionKey, questionNumber };
+  }
+
+  function createDefaultState() {
+    return {
+      version: 3,
+      mood: null,
+      history: [],
+      templates: JSON.parse(JSON.stringify(BUILT_IN_TEMPLATES)),
+      elements: JSON.parse(JSON.stringify(BUILT_IN_ELEMENTS)),
+      questionMeta: {},
+      current: null,
+      historyFilter: 'accepted',
+      materialTab: 'elements'
+    };
+  }
+
+  return {
+    MOODS, VIEWS, ELEMENT_TYPES, BUILT_IN_ELEMENTS, BUILT_IN_TEMPLATES,
+    randomItem, isCompatible, getQuestionNumber, getQuestionKey, fillTemplate,
+    moodBiasRate, chaosRate, pickTemplate, drawQuestion, createDefaultState
+  };
+});
+
+</script>
+<script>
+'use strict';
+
+const L = JournalLogic;
+const STORAGE_KEY = 'journumbering-v01';
+let openView = null;
+let ratingTargetKey = null;
+let historySearchQuery = '';
+let state = loadState();
+
+function deepCopy(value) { return JSON.parse(JSON.stringify(value)); }
+function nowIso() { return new Date().toISOString(); }
+function uid() { if (globalThis.crypto && typeof crypto.randomUUID === 'function') return crypto.randomUUID(); return 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2) + '-' + Math.random().toString(36).slice(2); }
+function escapeHtml(str) { return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])); }
+function formatDate(iso, withTime = false) {
+  if (!iso) return '';
+  return new Date(iso).toLocaleString('ja-JP', withTime
+    ? {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}
+    : {year:'numeric',month:'2-digit',day:'2-digit'});
+}
+
+function mergeTemplates(savedTemplates = []) {
+  const built = L.BUILT_IN_TEMPLATES.map(t => {
+    const old = savedTemplates.find(x => x.id === t.id);
+    return old ? {...deepCopy(t), enabled: old.enabled !== false} : deepCopy(t);
+  });
+  const custom = savedTemplates.filter(x => !L.BUILT_IN_TEMPLATES.some(t => t.id === x.id)).map((t, index, arr) => {
+    const existingNo = Number(t.number);
+    const sameViewBefore = arr.slice(0, index).filter(x => x.view === t.view).length;
+    const nextNo = 6 + sameViewBefore;
+    return {
+      ...t,
+      number: Number.isFinite(existingNo) ? existingNo : nextNo,
+      allowedTypes: Array.isArray(t.allowedTypes) && t.allowedTypes.length ? t.allowedTypes : L.ELEMENT_TYPES.map(x => x.id),
+      enabled: t.enabled !== false,
+      builtIn: false
+    };
+  });
+  return [...built, ...custom];
+}
+
+function mergeElements(savedElements = []) {
+  const built = L.BUILT_IN_ELEMENTS.map(e => {
+    const old = savedElements.find(x => Number(x.id) === e.id);
+    return old ? {...deepCopy(e), enabled: old.enabled !== false} : deepCopy(e);
+  });
+  const custom = savedElements.filter(x => !L.BUILT_IN_ELEMENTS.some(e => e.id === Number(x.id))).map(x => ({
+    id: Number(x.id), name: String(x.name), type: L.ELEMENT_TYPES.some(t => t.id === x.type) ? x.type : 'topic',
+    enabled: x.enabled !== false, builtIn: false
+  })).filter(x => Number.isFinite(x.id));
+  return [...built, ...custom];
+}
+
+function migrateState(saved) {
+  const fresh = L.createDefaultState();
+  if (!saved || typeof saved !== 'object') return fresh;
+
+  const templates = mergeTemplates(saved.templates || []);
+  const elements = mergeElements(saved.elements || []);
+  const questionMeta = saved.questionMeta && typeof saved.questionMeta === 'object' ? {...saved.questionMeta} : {};
+
+  const history = Array.isArray(saved.history) ? saved.history.map(h => {
+    const elementId = Number(h.elementId || (Number.isInteger(h.elementIndex) ? h.elementIndex + 1 : 0));
+    const template = templates.find(t => t.id === h.templateId);
+    const element = elements.find(e => e.id === elementId);
+    if (!template || !element || !h.viewId) return null;
+    const questionKey = L.getQuestionKey(h.viewId, elementId, h.templateId);
+    if (h.favorite || h.rating) questionMeta[questionKey] = {
+      ...(questionMeta[questionKey] || {}),
+      favorite: h.favorite || questionMeta[questionKey]?.favorite || false,
+      rating: h.rating || questionMeta[questionKey]?.rating || null
+    };
+    return {
+      id: h.id || uid(), questionKey,
+      questionNumber: h.questionNumber || L.getQuestionNumber(h.viewId, elementId, template.number),
+      viewId: h.viewId, elementId, templateId: h.templateId,
+      text: h.text || L.fillTemplate(template.text, element.name),
+      shownAt: h.shownAt || nowIso(), acceptedAt: h.acceptedAt || null
+    };
+  }).filter(Boolean) : [];
+
+  let current = null;
+  if (saved.current) {
+    const elementId = Number(saved.current.elementId || (Number.isInteger(saved.current.elementIndex) ? saved.current.elementIndex + 1 : 0));
+    const record = history.find(h => h.id === saved.current.logId);
+    if (record) current = {
+      logId: record.id, questionKey: record.questionKey, questionNumber: record.questionNumber,
+      viewId: record.viewId, elementId: record.elementId, templateId: record.templateId, text: record.text
+    };
+  }
+
+  return {
+    ...fresh, ...saved, version: 3, templates, elements, history, questionMeta, current,
+    historyFilter: ['accepted','all','favorite','good'].includes(saved.historyFilter) ? saved.historyFilter : 'accepted',
+    materialTab: ['elements','templates'].includes(saved.materialTab) ? saved.materialTab : 'elements'
+  };
+}
+
+function loadState() {
+  try { return migrateState(JSON.parse(localStorage.getItem(STORAGE_KEY))); }
+  catch { return L.createDefaultState(); }
+}
+function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function getCurrentRecord() { return state.history.find(h => h.id === state.current?.logId) || null; }
+function getMeta(key) { return state.questionMeta[key] || {favorite:false,rating:null}; }
+function setMeta(key, patch) { state.questionMeta[key] = {...getMeta(key), ...patch}; }
+function getView(id) { return L.VIEWS.find(v => v.id === id); }
+function getElement(id) { return state.elements.find(e => e.id === id); }
+function getTemplate(id) { return state.templates.find(t => t.id === id); }
+
+function renderMoods() {
+  const grid = document.getElementById('moodGrid');
+  grid.innerHTML = L.MOODS.map(m => `<button class="mood-btn ${state.mood===m.id?'selected':''}" data-mood="${m.id}">${m.label}<small>${m.help}</small></button>`).join('');
+  grid.querySelectorAll('[data-mood]').forEach(btn => btn.addEventListener('click', () => {
+    state.mood = btn.dataset.mood; saveState(); renderMoods(); renderCurrentCard();
+  }));
+  document.getElementById('drawBtn').disabled = !state.mood;
+}
+
+function renderCurrentCard() {
+  renderHomeStats();
+  const box = document.getElementById('currentCard');
+  const record = getCurrentRecord();
+  if (!record) { box.classList.add('hidden'); box.innerHTML=''; return; }
+  box.classList.remove('hidden');
+  box.innerHTML = `<div class="eyebrow">CURRENT QUESTION</div><strong>${escapeHtml(record.questionNumber)} ${record.acceptedAt?'・採用済み':'・選び途中'}</strong><div class="hint">${escapeHtml(record.text)}</div><button id="returnQuestion">問いに戻る</button>`;
+  document.getElementById('returnQuestion').addEventListener('click', () => { renderQuestion(); showScreen('question'); });
+}
+
+function renderHomeStats() {
+  const box = document.getElementById('homeStats');
+  if (!box) return;
+  const acceptedCount = state.history.filter(h => h.acceptedAt).length;
+  const favoriteCount = Object.values(state.questionMeta).filter(m => m && m.favorite).length;
+  const activeElements = state.elements.filter(e => e.enabled).length;
+  box.innerHTML = `<div class="hero-mini-label">YOUR LIBRARY</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>${acceptedCount}</strong><small>採用した問い</small></div>
+      <div class="hero-stat"><strong>${favoriteCount}</strong><small>お気に入り</small></div>
+      <div class="hero-stat"><strong>${activeElements}</strong><small>有効な要素</small></div>
+    </div>`;
+}
+
+function createOccurrence(question) {
+  const record = {...question, id:uid(), shownAt:nowIso(), acceptedAt:null};
+  state.history.push(record);
+  state.current = {
+    logId: record.id, questionKey: record.questionKey, questionNumber: record.questionNumber,
+    viewId: record.viewId, elementId: record.elementId, templateId: record.templateId, text: record.text
+  };
+  saveState();
+  return record;
+}
+
+function drawQuestion(mode='all') {
+  try {
+    let question;
+    if (mode === 'template' && state.current) {
+      const viewId = state.current.viewId;
+      const elementId = state.current.elementId;
+      const previousTemplateId = state.current.templateId;
+      const element = getElement(elementId);
+      const mood = state.mood || 'any';
+      let alternatives = state.templates.filter(t => t.enabled && t.view === viewId && t.id !== previousTemplateId && L.isCompatible(t, element));
+      if (mood !== 'any') {
+        const moodMatched = alternatives.filter(t => t.category === mood);
+        if (moodMatched.length) alternatives = moodMatched;
+      }
+      if (!alternatives.length) alternatives = state.templates.filter(t => t.enabled && t.view === viewId && t.id !== previousTemplateId);
+      if (!alternatives.length) throw new Error('この視点で使える別の問い方がありません。材料の「問い方」を増やしてください。');
+      const template = L.randomItem(alternatives);
+      question = {
+        viewId,
+        elementId,
+        templateId: template.id,
+        text: L.fillTemplate(template.text, element.name),
+        questionKey: L.getQuestionKey(viewId, elementId, template.id),
+        questionNumber: L.getQuestionNumber(viewId, elementId, template.number)
+      };
+    } else {
+      question = L.drawQuestion({state, mode});
+    }
+    createOccurrence(question);
+    renderQuestion(); renderCurrentCard(); showScreen('question');
+  } catch (error) { alert(error.message || '問いを作れませんでした。'); }
+}
+
+function renderQuestion() {
+  const record = getCurrentRecord(); if (!record) return;
+  const view = getView(record.viewId); const element = getElement(record.elementId); const meta = getMeta(record.questionKey);
+  document.getElementById('questionNumber').textContent = `問い番号 ${record.questionNumber}`;
+  document.getElementById('viewPill').textContent = `視点：${view?.name || record.viewId}`;
+  document.getElementById('elementLabel').textContent = `要素 #${String(record.elementId).padStart(2,'0')} ${element?.name || ''}`;
+  document.getElementById('questionText').textContent = record.text;
+
+  const prev = state.history.filter(h => h.questionKey === record.questionKey && h.id !== record.id);
+  const accepted = prev.filter(h => h.acceptedAt);
+  const note = document.getElementById('historyNote');
+  if (!prev.length) note.innerHTML = '<strong>この問いは初出です。</strong><br>手帳にそのまま書いても、別の問いを引いてもOK。';
+  else {
+    const recent = prev.slice(-4).reverse().map(h => formatDate(h.shownAt));
+    const acceptedText = accepted.length ? `<br><strong>前回採用：${formatDate(accepted[accepted.length-1].acceptedAt)}</strong>` : '<br>まだ採用されたことはありません。';
+    note.innerHTML = `<strong>この問いは過去に${prev.length}回表示されています。</strong><br>出題日：${recent.join(' / ')}${prev.length>4?' ほか':''}${acceptedText}`;
+  }
+
+  const acceptBtn = document.getElementById('acceptBtn');
+  acceptBtn.classList.toggle('accepted', !!record.acceptedAt);
+  acceptBtn.textContent = record.acceptedAt ? `✓ 今日の問いに決定済み（${record.questionNumber}）` : 'この問いに決める';
+
+  const fav = document.getElementById('favoriteBtn');
+  fav.classList.toggle('active', !!meta.favorite); fav.textContent = meta.favorite ? '★ お気に入り済み' : '☆ お気に入り';
+  const ratingLabels = {good:'👍 よかった',normal:'🙂 ふつう',bad:'↻ 微妙'};
+  document.getElementById('ratingBtn').textContent = meta.rating ? `${ratingLabels[meta.rating]}・再評価` : 'この問いを評価';
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id===id));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.screen===id));
+  document.getElementById('addMaterialBtn').classList.toggle('show', id==='materials');
+  if (id==='home') { renderMoods(); renderCurrentCard(); }
+  if (id==='history') renderHistory();
+  if (id==='materials') renderMaterials();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function uniqueLatest(items) {
+  const seen = new Set(); const result=[];
+  for (const item of items) if (!seen.has(item.questionKey)) { seen.add(item.questionKey); result.push(item); }
+  return result;
+}
+
+function renderHistory() {
+  let items = [...state.history].reverse();
+  if (state.historyFilter==='accepted') items = items.filter(h => h.acceptedAt);
+  if (state.historyFilter==='favorite') items = uniqueLatest(items.filter(h => getMeta(h.questionKey).favorite));
+  if (state.historyFilter==='good') items = uniqueLatest(items.filter(h => getMeta(h.questionKey).rating==='good'));
+
+  const q = historySearchQuery.trim().toLowerCase();
+  if (q) items = items.filter(h => {
+    const view = getView(h.viewId);
+    const element = getElement(h.elementId);
+    const haystack = [h.questionNumber,h.text,h.viewId,view?.name,String(h.elementId),`要素${h.elementId}`,element?.name]
+      .filter(Boolean).join(' ').toLowerCase();
+    return haystack.includes(q);
+  });
+
+  const list = document.getElementById('historyList');
+  if (!items.length) { list.innerHTML='<div class="empty">まだ該当する問いがありません。</div>'; return; }
+  list.innerHTML = items.map(item => {
+    const view=getView(item.viewId), meta=getMeta(item.questionKey);
+    const rating = meta.rating==='good'?'👍 よかった':meta.rating==='normal'?'🙂 ふつう':meta.rating==='bad'?'↻ 微妙':'';
+    return `<article class="history-item"><div class="date">${formatDate(item.acceptedAt || item.shownAt,true)}${item.acceptedAt?' ・ 採用':' ・ 表示'}</div><div class="qno">${escapeHtml(item.questionNumber)}</div><div class="text">${escapeHtml(item.text)}</div><div class="chips"><span class="tiny">${escapeHtml(view?.name || item.viewId)}</span>${meta.favorite?'<span class="tiny">★ お気に入り</span>':''}${rating?`<span class="tiny">${rating}</span>`:''}</div><div class="history-actions"><button class="history-action-btn ${meta.favorite?'active':''}" data-history-favorite="${escapeHtml(item.questionKey)}">${meta.favorite?'★ お気に入りを外す':'☆ お気に入り'}</button><button class="history-action-btn" data-history-rating="${escapeHtml(item.questionKey)}">${meta.rating?'問いを再評価':'問いを評価'}</button></div></article>`;
+  }).join('');
+  list.querySelectorAll('[data-history-favorite]').forEach(btn=>btn.addEventListener('click',()=>{
+    const key=btn.dataset.historyFavorite; const meta=getMeta(key); setMeta(key,{favorite:!meta.favorite}); saveState(); renderHistory(); renderCurrentCard();
+  }));
+  list.querySelectorAll('[data-history-rating]').forEach(btn=>btn.addEventListener('click',()=>{
+    ratingTargetKey=btn.dataset.historyRating; ratingDialog.showModal();
+  }));
+}
+
+function renderMaterials() {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab===state.materialTab));
+  document.getElementById('elementsPane').classList.toggle('hidden', state.materialTab!=='elements');
+  document.getElementById('templatesPane').classList.toggle('hidden', state.materialTab!=='templates');
+  renderElements(); renderTemplates();
+}
+
+function renderElements() {
+  const list=document.getElementById('elementList');
+  const typeLabel=id => L.ELEMENT_TYPES.find(t=>t.id===id)?.label || id;
+  list.innerHTML=[...state.elements].sort((a,b)=>a.id-b.id).map(el=>`<article class="element-item"><div class="element-head"><div class="element-main"><div class="element-no">${String(el.id).padStart(2,'0')}</div><div><h3>${escapeHtml(el.name)}${el.builtIn?'':' ・自作'}</h3><p>${escapeHtml(typeLabel(el.type))}</p></div></div><label class="toggle"><input type="checkbox" data-element-toggle="${el.id}" ${el.enabled?'checked':''}><span></span></label></div></article>`).join('');
+  list.querySelectorAll('[data-element-toggle]').forEach(input=>input.addEventListener('change',()=>{
+    const target=getElement(Number(input.dataset.elementToggle)); if(!target)return; target.enabled=input.checked;
+    if(!state.elements.some(e=>e.enabled)){target.enabled=true;alert('要素は最低1つ必要です。');}
+    saveState(); renderElements();
+  }));
+}
+
+function renderTemplates() {
+  const list=document.getElementById('templateList');
+  list.innerHTML=L.VIEWS.map(view=>{
+    const templates=state.templates.filter(t=>t.view===view.id).sort((a,b)=>a.number-b.number);
+    const enabled=templates.filter(t=>t.enabled).length;
+    return `<section class="view-group ${openView===view.id?'open':''}"><button class="view-head" data-view-group="${view.id}"><span><strong>${view.id} ${escapeHtml(view.name)}</strong></span><span class="count">${enabled}/${templates.length}問 ＞</span></button><div class="view-body">${templates.map(t=>`<article class="template-item"><div class="template-head"><div><h3>${String(t.number).padStart(2,'0')} ${escapeHtml(t.name)}${t.builtIn?'':' ・自作'}</h3><p>${escapeHtml(t.text)}</p></div><label class="toggle"><input type="checkbox" data-template-toggle="${t.id}" ${t.enabled?'checked':''}><span></span></label></div><div class="chips"><span class="tiny">${escapeHtml(L.MOODS.find(m=>m.id===t.category)?.label || t.category)}</span></div></article>`).join('')}</div></section>`;
+  }).join('');
+  list.querySelectorAll('[data-view-group]').forEach(btn=>btn.addEventListener('click',()=>{openView=openView===btn.dataset.viewGroup?null:btn.dataset.viewGroup;renderTemplates();}));
+  list.querySelectorAll('[data-template-toggle]').forEach(input=>input.addEventListener('change',()=>{
+    const target=getTemplate(input.dataset.templateToggle); if(!target)return; target.enabled=input.checked;
+    if(!state.templates.some(t=>t.view===target.view && t.enabled)){target.enabled=true;alert('各視点には最低1つの問い方が必要です。');}
+    saveState(); renderTemplates();
+  }));
+}
+
+function nextElementId() { return Math.max(0,...state.elements.map(e=>e.id))+1; }
+function nextTemplateNumber(view) { return Math.max(0,...state.templates.filter(t=>t.view===view).map(t=>Number(t.number)||0))+1; }
+
+function downloadBlob(content, type, filename) {
+  const blob=new Blob([content],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a');
+  a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url);
+}
+function exportData() {
+  downloadBlob(JSON.stringify(state,null,2),'application/json',`journumbering-backup-${new Date().toISOString().slice(0,10)}.json`);
+}
+function exportHistoryText() {
+  const accepted=[...state.history].filter(h=>h.acceptedAt).sort((a,b)=>new Date(a.acceptedAt)-new Date(b.acceptedAt));
+  const favoriteKeys=Object.entries(state.questionMeta).filter(([,m])=>m?.favorite).map(([key])=>key);
+  const favorites=[]; const seen=new Set();
+  [...state.history].reverse().forEach(h=>{ if(favoriteKeys.includes(h.questionKey)&&!seen.has(h.questionKey)){seen.add(h.questionKey);favorites.push(h);} });
+  const lines=['ジャーナンバリング 問いの履歴',`出力日：${formatDate(nowIso())}`,''];
+  lines.push('【採用した問い】');
+  if(!accepted.length) lines.push('まだ採用した問いはありません。');
+  accepted.forEach(h=>{lines.push(`${formatDate(h.acceptedAt)}  ${h.questionNumber}`);lines.push(h.text);lines.push('');});
+  lines.push('【お気に入りの問い】');
+  if(!favorites.length) lines.push('まだお気に入りの問いはありません。');
+  favorites.forEach(h=>{lines.push(`${h.questionNumber}`);lines.push(h.text);lines.push('');});
+  downloadBlob(lines.join('\r\n'),'text/plain;charset=utf-8',`journumbering-history-${new Date().toISOString().slice(0,10)}.txt`);
+}
+async function importData(file) {
+  try { const parsed=JSON.parse(await file.text()); state=migrateState(parsed); state.current=null; saveState(); alert('データを読み込みました。'); showScreen('home'); }
+  catch { alert('読み込みに失敗しました。ジャーナンバリングのバックアップファイルを選んでください。'); }
+}
+
+// 初期フォーム
+L.VIEWS.forEach(v=>{const o=document.createElement('option');o.value=v.id;o.textContent=`${v.id}：${v.name}`;document.getElementById('templateView').appendChild(o);});
+L.ELEMENT_TYPES.forEach(t=>{
+  const a=document.createElement('option');a.value=t.id;a.textContent=t.label;document.getElementById('elementType').appendChild(a);
+  const b=document.createElement('option');b.value=t.id;b.textContent=t.label;document.getElementById('templateType').appendChild(b);
+});
+
+renderMoods(); renderCurrentCard();
+
+document.getElementById('drawBtn').addEventListener('click',()=>drawQuestion('all'));
+document.getElementById('rerollAll').addEventListener('click',()=>drawQuestion('all'));
+document.getElementById('rerollElement').addEventListener('click',()=>drawQuestion('element'));
+document.getElementById('rerollTemplate').addEventListener('click',()=>drawQuestion('template'));
+document.getElementById('backHome').addEventListener('click',()=>showScreen('home'));
+
+document.getElementById('acceptBtn').addEventListener('click',()=>{
+  const record=getCurrentRecord(); if(!record)return;
+  if(!record.acceptedAt) { record.acceptedAt=nowIso(); saveState(); renderQuestion(); renderCurrentCard(); }
+});
+document.getElementById('favoriteBtn').addEventListener('click',()=>{
+  const record=getCurrentRecord();if(!record)return;const meta=getMeta(record.questionKey);setMeta(record.questionKey,{favorite:!meta.favorite});saveState();renderQuestion();
+});
+
+const ratingDialog=document.getElementById('ratingDialog');
+document.getElementById('ratingBtn').addEventListener('click',()=>{const r=getCurrentRecord();ratingTargetKey=r?.questionKey||null;ratingDialog.showModal();});
+ratingDialog.querySelectorAll('[data-rating]').forEach(btn=>btn.addEventListener('click',()=>{
+  if(ratingTargetKey){setMeta(ratingTargetKey,{rating:btn.dataset.rating==='clear'?null:btn.dataset.rating});saveState();renderQuestion();renderHistory();}
+  ratingTargetKey=null; ratingDialog.close();
+}));
+document.getElementById('helpBtn').addEventListener('click',()=>{
+  const helpDialog=document.getElementById('helpDialog');
+  helpDialog.showModal();
+  requestAnimationFrame(()=>{
+    helpDialog.scrollTop=0;
+    const body=helpDialog.querySelector('.dialog-body');
+    if(body) body.scrollTop=0;
+  });
+});
+
+document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>document.getElementById(btn.dataset.close).close()));
+document.querySelectorAll('.nav-btn').forEach(btn=>btn.addEventListener('click',()=>showScreen(btn.dataset.screen)));
+document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{state.historyFilter=btn.dataset.filter;saveState();document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b===btn));renderHistory();}));
+document.getElementById('historySearch').addEventListener('input',e=>{historySearchQuery=e.target.value;renderHistory();});
+document.getElementById('clearHistorySearch').addEventListener('click',()=>{historySearchQuery='';document.getElementById('historySearch').value='';renderHistory();document.getElementById('historySearch').focus();});
+document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{state.materialTab=btn.dataset.tab;saveState();renderMaterials();}));
+
+document.getElementById('addMaterialBtn').addEventListener('click',()=>document.getElementById(state.materialTab==='elements'?'elementDialog':'templateDialog').showModal());
+document.getElementById('elementForm').addEventListener('submit',e=>{
+  e.preventDefault(); const name=document.getElementById('elementName').value.trim(); const type=document.getElementById('elementType').value;
+  if(state.elements.some(x=>x.name===name)){alert('同じ名前の要素があります。');return;}
+  state.elements.push({id:nextElementId(),name,type,enabled:true,builtIn:false});saveState();e.target.reset();document.getElementById('elementDialog').close();renderMaterials();
+});
+document.getElementById('templateForm').addEventListener('submit',e=>{
+  e.preventDefault(); const name=document.getElementById('templateName').value.trim(),view=document.getElementById('templateView').value,category=document.getElementById('templateCategory').value,type=document.getElementById('templateType').value,text=document.getElementById('templateText').value.trim();
+  if(!text.includes('{要素}')){alert('質問文には {要素} を1つ以上入れてください。');return;}
+  state.templates.push({id:`custom-${uid()}`,number:nextTemplateNumber(view),name,view,category,text,allowedTypes:type==='all'?L.ELEMENT_TYPES.map(x=>x.id):[type],enabled:true,builtIn:false});
+  saveState();e.target.reset();document.getElementById('templateDialog').close();renderMaterials();
+});
+
+document.getElementById('exportBtn').addEventListener('click',exportData);
+document.getElementById('exportTextBtn').addEventListener('click',exportHistoryText);
+document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
+document.getElementById('importFile').addEventListener('change',e=>{const file=e.target.files?.[0];if(file)importData(file);e.target.value='';});
+document.getElementById('resetBtn').addEventListener('click',()=>{if(!confirm('この端末の履歴・お気に入り・自作材料をすべて削除します。元に戻せません。'))return;localStorage.removeItem(STORAGE_KEY);state=L.createDefaultState();openView=null;renderMoods();renderCurrentCard();alert('データを削除しました。');showScreen('home');});
+
+</script>
+</body>
+</html>
