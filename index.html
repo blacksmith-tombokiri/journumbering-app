@@ -103,6 +103,7 @@
     <div class="section-title"><div><div class="eyebrow">SETTINGS</div><h2>設定</h2></div></div>
     <div class="settings-grid">
       <button class="settings-btn" id="helpBtn">使い方・SCAMPERについて<small>一題の引き方、手帳への書き方、7つの視点を確認</small></button>
+      <button class="settings-btn" id="privacyBtn">プライバシー・アクセス解析<small>PostHogによる利用状況の記録と、収集しない情報について確認</small></button>
       <button class="settings-btn" id="exportBtn">バックアップを保存<small>履歴・お気に入り・自作材料を丸ごと保存</small></button>
       <button class="settings-btn" id="importBtn">バックアップから復元<small>以前保存したバックアップファイルを読み込む</small></button>
       <button class="settings-btn" id="exportTextBtn">出題の履歴をテキスト保存<small>採用した一題とお気に入りを読みやすい .txt 形式で保存</small></button>
@@ -152,6 +153,13 @@
   </div>
   <div class="guide-section"><h3>一題が気に入らないとき</h3><p>遠慮なく引き直してください。このアプリは「出た一題に必ず答える」ためのものではありません。書きたくなる一題を探すための道具です。</p></div>
   <div class="dialog-actions"><button class="ghost" data-close="helpDialog">閉じる</button></div>
+</div></dialog>
+
+<dialog id="privacyDialog"><div class="dialog-body"><h2>プライバシー・アクセス解析</h2>
+  <div class="guide-section"><p>ジャーナンバリング#では、サービス改善のためにアクセス解析サービス「PostHog」を利用しています。</p><p>ページ閲覧、一題の表示・引き直し・採用・評価、お気に入りやヘルプの利用状況などを記録します。</p><p>内蔵されている一題については、一題番号や視点・要素・問い方の番号を記録します。</p></div>
+  <div class="guide-section"><h3>収集しない情報</h3><p>回答内容をアプリに入力・保存する機能はなく、手帳やノートに書いた内容を取得することはありません。</p><p>また、自分で追加した「要素」や「問い方」の文章そのものはアクセス解析に送信しません。</p></div>
+  <div class="guide-section"><h3>IPアドレスについて</h3><p>クライアントIPアドレスは保存しない設定にしています。</p></div>
+  <div class="dialog-actions"><button class="ghost" data-close="privacyDialog">閉じる</button></div>
 </div></dialog>
 
 <dialog id="ratingDialog"><div class="dialog-body"><h2>この一題、どうだった？</h2><p class="lead">評価は「一題そのもの」に保存され、同じ一題が再登場しても引き継がれます。</p><div class="dialog-actions"><button class="ghost" data-rating="good">👍 よかった</button><button class="ghost" data-rating="normal">🙂 ふつう</button><button class="ghost" data-rating="bad">↻ 微妙</button></div><div class="dialog-actions"><button class="ghost" data-rating="clear">評価を外す</button><button class="ghost" data-close="ratingDialog">閉じる</button></div></div></dialog>
@@ -478,6 +486,7 @@ const ratingDialog=document.getElementById('ratingDialog');
 document.getElementById('ratingBtn').addEventListener('click',()=>{const r=getCurrentRecord();ratingTargetKey=r?.questionKey||null;ratingDialog.showModal();});
 ratingDialog.querySelectorAll('[data-rating]').forEach(btn=>btn.addEventListener('click',()=>{if(ratingTargetKey){const rating=btn.dataset.rating==='clear'?null:btn.dataset.rating;setMeta(ratingTargetKey,{rating});saveState();const record=latestRecordByQuestionKey(ratingTargetKey);posthogCapture('question_rated',{...analyticsQuestionProps(record),rating:rating||'clear'});renderQuestion();renderHistory();}ratingTargetKey=null;ratingDialog.close();}));
 document.getElementById('helpBtn').addEventListener('click',()=>{posthogCapture('help_opened');const helpDialog=document.getElementById('helpDialog');helpDialog.showModal();requestAnimationFrame(()=>{helpDialog.scrollTop=0;const body=helpDialog.querySelector('.dialog-body');if(body)body.scrollTop=0;});});
+document.getElementById('privacyBtn').addEventListener('click',()=>{const privacyDialog=document.getElementById('privacyDialog');privacyDialog.showModal();requestAnimationFrame(()=>{privacyDialog.scrollTop=0;const body=privacyDialog.querySelector('.dialog-body');if(body)body.scrollTop=0;});});
 
 document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>document.getElementById(btn.dataset.close).close()));
 document.querySelectorAll('.nav-btn').forEach(btn=>btn.addEventListener('click',()=>showScreen(btn.dataset.screen)));
