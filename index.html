@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#163b3b">
   <title>ジャーナンバリング</title>
   <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="th ih nh sh ah init Lh Nh Ah Oh zh Gu Dh Hh Eh Zh Jh Kh Xh Yh td capture getExtension qh dr rd calculateEventProperties nd register register_once register_for_session unregister unregister_for_session ud Rh od getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys onActiveMatchingSurveysChanged renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync hd identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset dd shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty ad Vh createPersonProfile setInternalOrTestUser ld fh hh opt_in_capturing opt_out_capturing dh has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Uh debug Qu Os getPageViewId captureTraceFeedback captureTraceMetric Ch".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog&&window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="th ih nh sh ah init Lh Nh Ah Oh zh Gu Dh Hh Eh Zh Jh Kh Xh Yh td capture getExtension qh dr rd calculateEventProperties nd register register_once register_for_session unregister unregister_for_session ud Rh od getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys onActiveMatchingSurveysChanged renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync hd identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags reset dd shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty ad Vh createPersonProfile setInternalOrTestUser ld fh hh opt_in_capturing opt_out_capturing dh has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Uh debug Qu Os getPageViewId captureTraceFeedback captureTraceMetric Ch".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_s2oRoMZkhcnxuiBFfvJmLQTSxKVYerGQ8XftWAdNTQcN', {
       api_host: 'https://us.i.posthog.com',
       defaults: '2026-05-30',
@@ -281,7 +281,6 @@
   }
 
   function isCompatible(template, element) {
-    // 「その他」は自由枠。分類に迷う要素も、すべての問い方と組み合わせられる。
     if (element.type === 'other') return true;
     return !template.allowedTypes || template.allowedTypes.includes(element.type);
   }
@@ -311,17 +310,14 @@
   function pickTemplate({ templates, viewId, element, mood = 'any', rng = Math.random, forceCompatible = false, preferMood = false }) {
     const enabled = templates.filter(t => t.enabled && t.view === viewId);
     if (!enabled.length) throw new Error(`視点 ${viewId} の有効な問い方がありません`);
-
     const compatible = enabled.filter(t => isCompatible(t, element));
     if (preferMood && mood !== 'any') {
       const moodMatched = compatible.filter(t => t.category === mood);
       if (moodMatched.length) return randomItem(moodMatched, rng);
     }
-
     const shouldChaos = !forceCompatible && rng() < chaosRate(mood);
     let pool = shouldChaos ? enabled : (compatible.length ? compatible : enabled);
     if (mood === 'any') return randomItem(pool, rng);
-
     const neutral = pool.filter(t => t.category === 'any');
     if (neutral.length && rng() < 0.6) pool = neutral;
     return randomItem(pool, rng);
@@ -334,15 +330,12 @@
   function drawQuestion({ state, mode = 'all', rng = Math.random, forceCompatible = false }) {
     const enabledElements = state.elements.filter(x => x.enabled);
     if (!enabledElements.length) throw new Error('有効な要素がありません');
-
     const mood = state.mood || 'any';
     const preferMood = mood !== 'any' && rng() < moodBiasRate(mood);
     let viewId = state.current?.viewId;
     let elementId = state.current?.elementId;
     let templateId = state.current?.templateId;
-
     const hasAnyTemplate = (vId, el) => state.templates.some(t => t.enabled && t.view === vId && isCompatible(t, el));
-
     if (mode === 'all' || !viewId || !elementId) {
       let pairs = [];
       for (const v of VIEWS) for (const el of enabledElements) {
@@ -357,55 +350,33 @@
       viewId = pair.viewId;
       elementId = pair.elementId;
     } else if (mode === 'element') {
-      let candidates = enabledElements.filter(el => preferMood
-        ? hasMoodTemplate(state.templates, viewId, el, mood)
-        : hasAnyTemplate(viewId, el));
+      let candidates = enabledElements.filter(el => preferMood ? hasMoodTemplate(state.templates, viewId, el, mood) : hasAnyTemplate(viewId, el));
       if (!candidates.length && preferMood) candidates = enabledElements.filter(el => hasAnyTemplate(viewId, el));
       if (!candidates.length) throw new Error('この視点で使える要素がありません');
       elementId = randomItem(candidates, rng).id;
     }
-
     const element = state.elements.find(x => x.id === elementId);
     if (!element || !element.enabled) throw new Error('要素が見つかりません');
-
     if (mode === 'all' || mode === 'template' || mode === 'element' || !templateId) {
       templateId = pickTemplate({ templates: state.templates, viewId, element, mood, rng, forceCompatible, preferMood }).id;
     }
-
     let template = state.templates.find(t => t.id === templateId);
     if (!template || !template.enabled || template.view !== viewId || (forceCompatible && !isCompatible(template, element))) {
       template = pickTemplate({ templates: state.templates, viewId, element, mood, rng, forceCompatible, preferMood });
       templateId = template.id;
     }
-
     const text = fillTemplate(template.text, element.name);
     const questionKey = getQuestionKey(viewId, elementId, templateId);
     const questionNumber = getQuestionNumber(viewId, elementId, template.number);
-
     return { viewId, elementId, templateId, text, questionKey, questionNumber };
   }
 
   function createDefaultState() {
-    return {
-      version: 3,
-      mood: null,
-      history: [],
-      templates: JSON.parse(JSON.stringify(BUILT_IN_TEMPLATES)),
-      elements: JSON.parse(JSON.stringify(BUILT_IN_ELEMENTS)),
-      questionMeta: {},
-      current: null,
-      historyFilter: 'accepted',
-      materialTab: 'elements'
-    };
+    return {version:3,mood:null,history:[],templates:JSON.parse(JSON.stringify(BUILT_IN_TEMPLATES)),elements:JSON.parse(JSON.stringify(BUILT_IN_ELEMENTS)),questionMeta:{},current:null,historyFilter:'accepted',materialTab:'elements'};
   }
 
-  return {
-    MOODS, VIEWS, ELEMENT_TYPES, BUILT_IN_ELEMENTS, BUILT_IN_TEMPLATES,
-    randomItem, isCompatible, getQuestionNumber, getQuestionKey, fillTemplate,
-    moodBiasRate, chaosRate, pickTemplate, drawQuestion, createDefaultState
-  };
+  return {MOODS,VIEWS,ELEMENT_TYPES,BUILT_IN_ELEMENTS,BUILT_IN_TEMPLATES,randomItem,isCompatible,getQuestionNumber,getQuestionKey,fillTemplate,moodBiasRate,chaosRate,pickTemplate,drawQuestion,createDefaultState};
 });
-
 </script>
 <script>
 'use strict';
@@ -415,359 +386,98 @@ const STORAGE_KEY = 'journumbering-v01';
 let openView = null;
 let ratingTargetKey = null;
 let historySearchQuery = '';
+let analyticsDrawSessionId = null;
+let analyticsRerollCounts = {all:0,element:0,template:0};
 let state = loadState();
 
 function deepCopy(value) { return JSON.parse(JSON.stringify(value)); }
 function nowIso() { return new Date().toISOString(); }
 function uid() { if (globalThis.crypto && typeof crypto.randomUUID === 'function') return crypto.randomUUID(); return 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2) + '-' + Math.random().toString(36).slice(2); }
 function escapeHtml(str) { return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])); }
-function formatDate(iso, withTime = false) {
-  if (!iso) return '';
-  return new Date(iso).toLocaleString('ja-JP', withTime
-    ? {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}
-    : {year:'numeric',month:'2-digit',day:'2-digit'});
-}
+function formatDate(iso, withTime = false) { if (!iso) return ''; return new Date(iso).toLocaleString('ja-JP', withTime ? {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'} : {year:'numeric',month:'2-digit',day:'2-digit'}); }
 
 function mergeTemplates(savedTemplates = []) {
-  const built = L.BUILT_IN_TEMPLATES.map(t => {
-    const old = savedTemplates.find(x => x.id === t.id);
-    return old ? {...deepCopy(t), enabled: old.enabled !== false} : deepCopy(t);
-  });
-  const custom = savedTemplates.filter(x => !L.BUILT_IN_TEMPLATES.some(t => t.id === x.id)).map((t, index, arr) => {
-    const existingNo = Number(t.number);
-    const sameViewBefore = arr.slice(0, index).filter(x => x.view === t.view).length;
-    const nextNo = 6 + sameViewBefore;
-    return {
-      ...t,
-      number: Number.isFinite(existingNo) ? existingNo : nextNo,
-      allowedTypes: Array.isArray(t.allowedTypes) && t.allowedTypes.length ? t.allowedTypes : L.ELEMENT_TYPES.map(x => x.id),
-      enabled: t.enabled !== false,
-      builtIn: false
-    };
-  });
-  return [...built, ...custom];
+  const built = L.BUILT_IN_TEMPLATES.map(t => { const old=savedTemplates.find(x=>x.id===t.id); return old?{...deepCopy(t),enabled:old.enabled!==false}:deepCopy(t); });
+  const custom = savedTemplates.filter(x=>!L.BUILT_IN_TEMPLATES.some(t=>t.id===x.id)).map((t,index,arr)=>{ const existingNo=Number(t.number); const sameViewBefore=arr.slice(0,index).filter(x=>x.view===t.view).length; const nextNo=6+sameViewBefore; return {...t,number:Number.isFinite(existingNo)?existingNo:nextNo,allowedTypes:Array.isArray(t.allowedTypes)&&t.allowedTypes.length?t.allowedTypes:L.ELEMENT_TYPES.map(x=>x.id),enabled:t.enabled!==false,builtIn:false}; });
+  return [...built,...custom];
 }
-
 function mergeElements(savedElements = []) {
-  const built = L.BUILT_IN_ELEMENTS.map(e => {
-    const old = savedElements.find(x => Number(x.id) === e.id);
-    return old ? {...deepCopy(e), enabled: old.enabled !== false} : deepCopy(e);
-  });
-  const custom = savedElements.filter(x => !L.BUILT_IN_ELEMENTS.some(e => e.id === Number(x.id))).map(x => ({
-    id: Number(x.id), name: String(x.name), type: L.ELEMENT_TYPES.some(t => t.id === x.type) ? x.type : 'topic',
-    enabled: x.enabled !== false, builtIn: false
-  })).filter(x => Number.isFinite(x.id));
-  return [...built, ...custom];
+  const built=L.BUILT_IN_ELEMENTS.map(e=>{const old=savedElements.find(x=>Number(x.id)===e.id);return old?{...deepCopy(e),enabled:old.enabled!==false}:deepCopy(e);});
+  const custom=savedElements.filter(x=>!L.BUILT_IN_ELEMENTS.some(e=>e.id===Number(x.id))).map(x=>({id:Number(x.id),name:String(x.name),type:L.ELEMENT_TYPES.some(t=>t.id===x.type)?x.type:'topic',enabled:x.enabled!==false,builtIn:false})).filter(x=>Number.isFinite(x.id));
+  return [...built,...custom];
 }
-
 function migrateState(saved) {
-  const fresh = L.createDefaultState();
-  if (!saved || typeof saved !== 'object') return fresh;
-
-  const templates = mergeTemplates(saved.templates || []);
-  const elements = mergeElements(saved.elements || []);
-  const questionMeta = saved.questionMeta && typeof saved.questionMeta === 'object' ? {...saved.questionMeta} : {};
-
-  const history = Array.isArray(saved.history) ? saved.history.map(h => {
-    const elementId = Number(h.elementId || (Number.isInteger(h.elementIndex) ? h.elementIndex + 1 : 0));
-    const template = templates.find(t => t.id === h.templateId);
-    const element = elements.find(e => e.id === elementId);
-    if (!template || !element || !h.viewId) return null;
-    const questionKey = L.getQuestionKey(h.viewId, elementId, h.templateId);
-    if (h.favorite || h.rating) questionMeta[questionKey] = {
-      ...(questionMeta[questionKey] || {}),
-      favorite: h.favorite || questionMeta[questionKey]?.favorite || false,
-      rating: h.rating || questionMeta[questionKey]?.rating || null
-    };
-    return {
-      id: h.id || uid(), questionKey,
-      questionNumber: h.questionNumber || L.getQuestionNumber(h.viewId, elementId, template.number),
-      viewId: h.viewId, elementId, templateId: h.templateId,
-      text: h.text || L.fillTemplate(template.text, element.name),
-      shownAt: h.shownAt || nowIso(), acceptedAt: h.acceptedAt || null
-    };
-  }).filter(Boolean) : [];
-
-  let current = null;
-  if (saved.current) {
-    const elementId = Number(saved.current.elementId || (Number.isInteger(saved.current.elementIndex) ? saved.current.elementIndex + 1 : 0));
-    const record = history.find(h => h.id === saved.current.logId);
-    if (record) current = {
-      logId: record.id, questionKey: record.questionKey, questionNumber: record.questionNumber,
-      viewId: record.viewId, elementId: record.elementId, templateId: record.templateId, text: record.text
-    };
-  }
-
-  return {
-    ...fresh, ...saved, version: 3, templates, elements, history, questionMeta, current,
-    historyFilter: ['accepted','all','favorite','good'].includes(saved.historyFilter) ? saved.historyFilter : 'accepted',
-    materialTab: ['elements','templates'].includes(saved.materialTab) ? saved.materialTab : 'elements'
-  };
+  const fresh=L.createDefaultState(); if(!saved||typeof saved!=='object')return fresh;
+  const templates=mergeTemplates(saved.templates||[]), elements=mergeElements(saved.elements||[]), questionMeta=saved.questionMeta&&typeof saved.questionMeta==='object'?{...saved.questionMeta}:{};
+  const history=Array.isArray(saved.history)?saved.history.map(h=>{const elementId=Number(h.elementId||(Number.isInteger(h.elementIndex)?h.elementIndex+1:0));const template=templates.find(t=>t.id===h.templateId);const element=elements.find(e=>e.id===elementId);if(!template||!element||!h.viewId)return null;const questionKey=L.getQuestionKey(h.viewId,elementId,h.templateId);if(h.favorite||h.rating)questionMeta[questionKey]={...(questionMeta[questionKey]||{}),favorite:h.favorite||questionMeta[questionKey]?.favorite||false,rating:h.rating||questionMeta[questionKey]?.rating||null};return{id:h.id||uid(),questionKey,questionNumber:h.questionNumber||L.getQuestionNumber(h.viewId,elementId,template.number),viewId:h.viewId,elementId,templateId:h.templateId,text:h.text||L.fillTemplate(template.text,element.name),shownAt:h.shownAt||nowIso(),acceptedAt:h.acceptedAt||null};}).filter(Boolean):[];
+  let current=null;if(saved.current){const record=history.find(h=>h.id===saved.current.logId);if(record)current={logId:record.id,questionKey:record.questionKey,questionNumber:record.questionNumber,viewId:record.viewId,elementId:record.elementId,templateId:record.templateId,text:record.text};}
+  return {...fresh,...saved,version:3,templates,elements,history,questionMeta,current,historyFilter:['accepted','all','favorite','good'].includes(saved.historyFilter)?saved.historyFilter:'accepted',materialTab:['elements','templates'].includes(saved.materialTab)?saved.materialTab:'elements'};
+}
+function loadState(){try{return migrateState(JSON.parse(localStorage.getItem(STORAGE_KEY)));}catch{return L.createDefaultState();}}
+function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
+function getCurrentRecord(){return state.history.find(h=>h.id===state.current?.logId)||null;}
+function getMeta(key){return state.questionMeta[key]||{favorite:false,rating:null};}
+function setMeta(key,patch){state.questionMeta[key]={...getMeta(key),...patch};}
+function getView(id){return L.VIEWS.find(v=>v.id===id);}
+function getElement(id){return state.elements.find(e=>e.id===id);}
+function getTemplate(id){return state.templates.find(t=>t.id===id);}
+function latestRecordByQuestionKey(key){return [...state.history].reverse().find(h=>h.questionKey===key)||null;}
+function totalRerolls(){return analyticsRerollCounts.all+analyticsRerollCounts.element+analyticsRerollCounts.template;}
+function beginAnalyticsDrawSession(){analyticsDrawSessionId=uid();analyticsRerollCounts={all:0,element:0,template:0};}
+function posthogCapture(name,props={}){try{if(window.posthog&&typeof window.posthog.capture==='function')window.posthog.capture(name,props);}catch{}}
+function analyticsQuestionProps(record){
+  if(!record)return{content_source:'unknown',mood:state.mood||'any',draw_session_id:analyticsDrawSessionId};
+  const element=getElement(record.elementId),template=getTemplate(record.templateId);const builtIn=!!(element?.builtIn&&template?.builtIn);
+  const props={content_source:builtIn?'built_in':'custom',custom_element:element?.builtIn===false,custom_template:template?.builtIn===false,mood:state.mood||'any',draw_session_id:analyticsDrawSessionId};
+  if(builtIn)Object.assign(props,{question_id:record.questionNumber,viewpoint:record.viewId,element_id:record.elementId,template_id:record.templateId});
+  return props;
 }
 
-function loadState() {
-  try { return migrateState(JSON.parse(localStorage.getItem(STORAGE_KEY))); }
-  catch { return L.createDefaultState(); }
-}
-function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-function getCurrentRecord() { return state.history.find(h => h.id === state.current?.logId) || null; }
-function getMeta(key) { return state.questionMeta[key] || {favorite:false,rating:null}; }
-function setMeta(key, patch) { state.questionMeta[key] = {...getMeta(key), ...patch}; }
-function getView(id) { return L.VIEWS.find(v => v.id === id); }
-function getElement(id) { return state.elements.find(e => e.id === id); }
-function getTemplate(id) { return state.templates.find(t => t.id === id); }
+function renderMoods(){const grid=document.getElementById('moodGrid');grid.innerHTML=L.MOODS.map(m=>`<button class="mood-btn ${state.mood===m.id?'selected':''}" data-mood="${m.id}">${m.label}<small>${m.help}</small></button>`).join('');grid.querySelectorAll('[data-mood]').forEach(btn=>btn.addEventListener('click',()=>{state.mood=btn.dataset.mood;saveState();renderMoods();renderCurrentCard();}));document.getElementById('drawBtn').disabled=!state.mood;}
+function renderCurrentCard(){renderHomeStats();const box=document.getElementById('currentCard'),record=getCurrentRecord();if(!record){box.classList.add('hidden');box.innerHTML='';return;}box.classList.remove('hidden');box.innerHTML=`<div class="eyebrow">CURRENT QUESTION</div><strong>${escapeHtml(record.questionNumber)} ${record.acceptedAt?'・採用済み':'・選び途中'}</strong><div class="hint">${escapeHtml(record.text)}</div><button id="returnQuestion">一題に戻る</button>`;document.getElementById('returnQuestion').addEventListener('click',()=>{renderQuestion();showScreen('question');});}
+function renderHomeStats(){const box=document.getElementById('homeStats');if(!box)return;const acceptedCount=state.history.filter(h=>h.acceptedAt).length,favoriteCount=Object.values(state.questionMeta).filter(m=>m&&m.favorite).length,activeElements=state.elements.filter(e=>e.enabled).length;box.innerHTML=`<div class="hero-mini-label">YOUR LIBRARY</div><div class="hero-stats"><div class="hero-stat"><strong>${acceptedCount}</strong><small>採用した一題</small></div><div class="hero-stat"><strong>${favoriteCount}</strong><small>お気に入り</small></div><div class="hero-stat"><strong>${activeElements}</strong><small>有効な要素</small></div></div>`;}
+function createOccurrence(question){const record={...question,id:uid(),shownAt:nowIso(),acceptedAt:null};state.history.push(record);state.current={logId:record.id,questionKey:record.questionKey,questionNumber:record.questionNumber,viewId:record.viewId,elementId:record.elementId,templateId:record.templateId,text:record.text};saveState();return record;}
 
-function renderMoods() {
-  const grid = document.getElementById('moodGrid');
-  grid.innerHTML = L.MOODS.map(m => `<button class="mood-btn ${state.mood===m.id?'selected':''}" data-mood="${m.id}">${m.label}<small>${m.help}</small></button>`).join('');
-  grid.querySelectorAll('[data-mood]').forEach(btn => btn.addEventListener('click', () => {
-    state.mood = btn.dataset.mood; saveState(); renderMoods(); renderCurrentCard();
-  }));
-  document.getElementById('drawBtn').disabled = !state.mood;
-}
-
-function renderCurrentCard() {
-  renderHomeStats();
-  const box = document.getElementById('currentCard');
-  const record = getCurrentRecord();
-  if (!record) { box.classList.add('hidden'); box.innerHTML=''; return; }
-  box.classList.remove('hidden');
-  box.innerHTML = `<div class="eyebrow">CURRENT QUESTION</div><strong>${escapeHtml(record.questionNumber)} ${record.acceptedAt?'・採用済み':'・選び途中'}</strong><div class="hint">${escapeHtml(record.text)}</div><button id="returnQuestion">一題に戻る</button>`;
-  document.getElementById('returnQuestion').addEventListener('click', () => { renderQuestion(); showScreen('question'); });
-}
-
-function renderHomeStats() {
-  const box = document.getElementById('homeStats');
-  if (!box) return;
-  const acceptedCount = state.history.filter(h => h.acceptedAt).length;
-  const favoriteCount = Object.values(state.questionMeta).filter(m => m && m.favorite).length;
-  const activeElements = state.elements.filter(e => e.enabled).length;
-  box.innerHTML = `<div class="hero-mini-label">YOUR LIBRARY</div>
-    <div class="hero-stats">
-      <div class="hero-stat"><strong>${acceptedCount}</strong><small>採用した一題</small></div>
-      <div class="hero-stat"><strong>${favoriteCount}</strong><small>お気に入り</small></div>
-      <div class="hero-stat"><strong>${activeElements}</strong><small>有効な要素</small></div>
-    </div>`;
-}
-
-function createOccurrence(question) {
-  const record = {...question, id:uid(), shownAt:nowIso(), acceptedAt:null};
-  state.history.push(record);
-  state.current = {
-    logId: record.id, questionKey: record.questionKey, questionNumber: record.questionNumber,
-    viewId: record.viewId, elementId: record.elementId, templateId: record.templateId, text: record.text
-  };
-  saveState();
-  return record;
-}
-
-function drawQuestion(mode='all') {
-  try {
+function drawQuestion(mode='all',source='initial'){
+  try{
+    if(source==='initial'||!analyticsDrawSessionId)beginAnalyticsDrawSession();
+    if(source.startsWith('reroll_')){const previous=getCurrentRecord();const rerollType=source.replace('reroll_','');if(analyticsRerollCounts[rerollType]!==undefined)analyticsRerollCounts[rerollType]+=1;posthogCapture('question_rerolled',{...analyticsQuestionProps(previous),reroll_type:rerollType,reroll_number:totalRerolls()});}
     let question;
-    if (mode === 'template' && state.current) {
-      const viewId = state.current.viewId;
-      const elementId = state.current.elementId;
-      const previousTemplateId = state.current.templateId;
-      const element = getElement(elementId);
-      const mood = state.mood || 'any';
-      let alternatives = state.templates.filter(t => t.enabled && t.view === viewId && t.id !== previousTemplateId && L.isCompatible(t, element));
-      if (mood !== 'any') {
-        const moodMatched = alternatives.filter(t => t.category === mood);
-        if (moodMatched.length) alternatives = moodMatched;
-      }
-      if (!alternatives.length) alternatives = state.templates.filter(t => t.enabled && t.view === viewId && t.id !== previousTemplateId);
-      if (!alternatives.length) throw new Error('この視点で使える別の問い方がありません。材料の「問い方」を増やしてください。');
-      const template = L.randomItem(alternatives);
-      question = {
-        viewId,
-        elementId,
-        templateId: template.id,
-        text: L.fillTemplate(template.text, element.name),
-        questionKey: L.getQuestionKey(viewId, elementId, template.id),
-        questionNumber: L.getQuestionNumber(viewId, elementId, template.number)
-      };
-    } else {
-      question = L.drawQuestion({state, mode});
-    }
-    createOccurrence(question);
-    renderQuestion(); renderCurrentCard(); showScreen('question');
-  } catch (error) { alert(error.message || '一題を作れませんでした。'); }
+    if(mode==='template'&&state.current){const viewId=state.current.viewId,elementId=state.current.elementId,previousTemplateId=state.current.templateId,element=getElement(elementId),mood=state.mood||'any';let alternatives=state.templates.filter(t=>t.enabled&&t.view===viewId&&t.id!==previousTemplateId&&L.isCompatible(t,element));if(mood!=='any'){const moodMatched=alternatives.filter(t=>t.category===mood);if(moodMatched.length)alternatives=moodMatched;}if(!alternatives.length)alternatives=state.templates.filter(t=>t.enabled&&t.view===viewId&&t.id!==previousTemplateId);if(!alternatives.length)throw new Error('この視点で使える別の問い方がありません。材料の「問い方」を増やしてください。');const template=L.randomItem(alternatives);question={viewId,elementId,templateId:template.id,text:L.fillTemplate(template.text,element.name),questionKey:L.getQuestionKey(viewId,elementId,template.id),questionNumber:L.getQuestionNumber(viewId,elementId,template.number)};}else{question=L.drawQuestion({state,mode});}
+    const record=createOccurrence(question);posthogCapture('question_drawn',{...analyticsQuestionProps(record),draw_type:source,reroll_count:totalRerolls()});renderQuestion();renderCurrentCard();showScreen('question');
+  }catch(error){alert(error.message||'一題を作れませんでした。');}
 }
 
-function renderQuestion() {
-  const record = getCurrentRecord(); if (!record) return;
-  const view = getView(record.viewId); const element = getElement(record.elementId); const meta = getMeta(record.questionKey);
-  document.getElementById('questionNumber').textContent = `一題番号 ${record.questionNumber}`;
-  document.getElementById('viewPill').textContent = `視点：${view?.name || record.viewId}`;
-  document.getElementById('elementLabel').textContent = `要素 #${String(record.elementId).padStart(2,'0')} ${element?.name || ''}`;
-  document.getElementById('questionText').textContent = record.text;
+function renderQuestion(){const record=getCurrentRecord();if(!record)return;const view=getView(record.viewId),element=getElement(record.elementId),meta=getMeta(record.questionKey);document.getElementById('questionNumber').textContent=`一題番号 ${record.questionNumber}`;document.getElementById('viewPill').textContent=`視点：${view?.name||record.viewId}`;document.getElementById('elementLabel').textContent=`要素 #${String(record.elementId).padStart(2,'0')} ${element?.name||''}`;document.getElementById('questionText').textContent=record.text;const prev=state.history.filter(h=>h.questionKey===record.questionKey&&h.id!==record.id),accepted=prev.filter(h=>h.acceptedAt),note=document.getElementById('historyNote');if(!prev.length)note.innerHTML='<strong>この一題は初出です。</strong><br>手帳にそのまま書いても、別の一題を引いてもOK。';else{const recent=prev.slice(-4).reverse().map(h=>formatDate(h.shownAt));const acceptedText=accepted.length?`<br><strong>前回採用：${formatDate(accepted[accepted.length-1].acceptedAt)}</strong>`:'<br>まだ採用されたことはありません。';note.innerHTML=`<strong>この一題は過去に${prev.length}回表示されています。</strong><br>出題日：${recent.join(' / ')}${prev.length>4?' ほか':''}${acceptedText}`;}const acceptBtn=document.getElementById('acceptBtn');acceptBtn.classList.toggle('accepted',!!record.acceptedAt);acceptBtn.textContent=record.acceptedAt?`✓ 今日の一題に決定済み（${record.questionNumber}）`:'この一題に決める';const fav=document.getElementById('favoriteBtn');fav.classList.toggle('active',!!meta.favorite);fav.textContent=meta.favorite?'★ お気に入り済み':'☆ お気に入り';const ratingLabels={good:'👍 よかった',normal:'🙂 ふつう',bad:'↻ 微妙'};document.getElementById('ratingBtn').textContent=meta.rating?`${ratingLabels[meta.rating]}・再評価`:'この一題を評価';}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));document.getElementById('addMaterialBtn').classList.toggle('show',id==='materials');if(id==='home'){renderMoods();renderCurrentCard();}if(id==='history')renderHistory();if(id==='materials')renderMaterials();window.scrollTo({top:0,behavior:'smooth'});}
+function uniqueLatest(items){const seen=new Set(),result=[];for(const item of items)if(!seen.has(item.questionKey)){seen.add(item.questionKey);result.push(item);}return result;}
+function renderHistory(){let items=[...state.history].reverse();if(state.historyFilter==='accepted')items=items.filter(h=>h.acceptedAt);if(state.historyFilter==='favorite')items=uniqueLatest(items.filter(h=>getMeta(h.questionKey).favorite));if(state.historyFilter==='good')items=uniqueLatest(items.filter(h=>getMeta(h.questionKey).rating==='good'));const q=historySearchQuery.trim().toLowerCase();if(q)items=items.filter(h=>{const view=getView(h.viewId),element=getElement(h.elementId);return[h.questionNumber,h.text,h.viewId,view?.name,String(h.elementId),`要素${h.elementId}`,element?.name].filter(Boolean).join(' ').toLowerCase().includes(q);});const list=document.getElementById('historyList');if(!items.length){list.innerHTML='<div class="empty">まだ該当する一題がありません。</div>';return;}list.innerHTML=items.map(item=>{const view=getView(item.viewId),meta=getMeta(item.questionKey),rating=meta.rating==='good'?'👍 よかった':meta.rating==='normal'?'🙂 ふつう':meta.rating==='bad'?'↻ 微妙':'';return`<article class="history-item"><div class="date">${formatDate(item.acceptedAt||item.shownAt,true)}${item.acceptedAt?' ・ 採用':' ・ 表示'}</div><div class="qno">${escapeHtml(item.questionNumber)}</div><div class="text">${escapeHtml(item.text)}</div><div class="chips"><span class="tiny">${escapeHtml(view?.name||item.viewId)}</span>${meta.favorite?'<span class="tiny">★ お気に入り</span>':''}${rating?`<span class="tiny">${rating}</span>`:''}</div><div class="history-actions"><button class="history-action-btn ${meta.favorite?'active':''}" data-history-favorite="${escapeHtml(item.questionKey)}">${meta.favorite?'★ お気に入りを外す':'☆ お気に入り'}</button><button class="history-action-btn" data-history-rating="${escapeHtml(item.questionKey)}">${meta.rating?'一題を再評価':'一題を評価'}</button></div></article>`;}).join('');list.querySelectorAll('[data-history-favorite]').forEach(btn=>btn.addEventListener('click',()=>{const key=btn.dataset.historyFavorite,meta=getMeta(key),nextFavorite=!meta.favorite;setMeta(key,{favorite:nextFavorite});saveState();const record=latestRecordByQuestionKey(key);posthogCapture('favorite_toggled',{...analyticsQuestionProps(record),favorite:nextFavorite,source:'history'});renderHistory();renderCurrentCard();}));list.querySelectorAll('[data-history-rating]').forEach(btn=>btn.addEventListener('click',()=>{ratingTargetKey=btn.dataset.historyRating;ratingDialog.showModal();}));}
+function renderMaterials(){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===state.materialTab));document.getElementById('elementsPane').classList.toggle('hidden',state.materialTab!=='elements');document.getElementById('templatesPane').classList.toggle('hidden',state.materialTab!=='templates');renderElements();renderTemplates();}
+function renderElements(){const list=document.getElementById('elementList'),typeLabel=id=>L.ELEMENT_TYPES.find(t=>t.id===id)?.label||id;list.innerHTML=[...state.elements].sort((a,b)=>a.id-b.id).map(el=>`<article class="element-item"><div class="element-head"><div class="element-main"><div class="element-no">${String(el.id).padStart(2,'0')}</div><div><h3>${escapeHtml(el.name)}${el.builtIn?'':' ・自作'}</h3><p>${escapeHtml(typeLabel(el.type))}</p></div></div><label class="toggle"><input type="checkbox" data-element-toggle="${el.id}" ${el.enabled?'checked':''}><span></span></label></div></article>`).join('');list.querySelectorAll('[data-element-toggle]').forEach(input=>input.addEventListener('change',()=>{const target=getElement(Number(input.dataset.elementToggle));if(!target)return;target.enabled=input.checked;if(!state.elements.some(e=>e.enabled)){target.enabled=true;alert('要素は最低1つ必要です。');}saveState();renderElements();}));}
+function renderTemplates(){const list=document.getElementById('templateList');list.innerHTML=L.VIEWS.map(view=>{const templates=state.templates.filter(t=>t.view===view.id).sort((a,b)=>a.number-b.number),enabled=templates.filter(t=>t.enabled).length;return`<section class="view-group ${openView===view.id?'open':''}"><button class="view-head" data-view-group="${view.id}"><span><strong>${view.id} ${escapeHtml(view.name)}</strong></span><span class="count">${enabled}/${templates.length}問 ＞</span></button><div class="view-body">${templates.map(t=>`<article class="template-item"><div class="template-head"><div><h3>${String(t.number).padStart(2,'0')} ${escapeHtml(t.name)}${t.builtIn?'':' ・自作'}</h3><p>${escapeHtml(t.text)}</p></div><label class="toggle"><input type="checkbox" data-template-toggle="${t.id}" ${t.enabled?'checked':''}><span></span></label></div><div class="chips"><span class="tiny">${escapeHtml(L.MOODS.find(m=>m.id===t.category)?.label||t.category)}</span></div></article>`).join('')}</div></section>`;}).join('');list.querySelectorAll('[data-view-group]').forEach(btn=>btn.addEventListener('click',()=>{openView=openView===btn.dataset.viewGroup?null:btn.dataset.viewGroup;renderTemplates();}));list.querySelectorAll('[data-template-toggle]').forEach(input=>input.addEventListener('change',()=>{const target=getTemplate(input.dataset.templateToggle);if(!target)return;target.enabled=input.checked;if(!state.templates.some(t=>t.view===target.view&&t.enabled)){target.enabled=true;alert('各視点には最低1つの問い方が必要です。');}saveState();renderTemplates();}));}
+function nextElementId(){return Math.max(0,...state.elements.map(e=>e.id))+1;}
+function nextTemplateNumber(view){return Math.max(0,...state.templates.filter(t=>t.view===view).map(t=>Number(t.number)||0))+1;}
+function downloadBlob(content,type,filename){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url);}
+function exportData(){downloadBlob(JSON.stringify(state,null,2),'application/json',`journumbering-backup-${new Date().toISOString().slice(0,10)}.json`);}
+function exportHistoryText(){const accepted=[...state.history].filter(h=>h.acceptedAt).sort((a,b)=>new Date(a.acceptedAt)-new Date(b.acceptedAt)),favoriteKeys=Object.entries(state.questionMeta).filter(([,m])=>m?.favorite).map(([key])=>key),favorites=[],seen=new Set();[...state.history].reverse().forEach(h=>{if(favoriteKeys.includes(h.questionKey)&&!seen.has(h.questionKey)){seen.add(h.questionKey);favorites.push(h);}});const lines=['ジャーナンバリング 一題の履歴',`出力日：${formatDate(nowIso())}`,'','【採用した一題】'];if(!accepted.length)lines.push('まだ採用した一題はありません。');accepted.forEach(h=>{lines.push(`${formatDate(h.acceptedAt)}  ${h.questionNumber}`,h.text,'');});lines.push('【お気に入りの一題】');if(!favorites.length)lines.push('まだお気に入りの一題はありません。');favorites.forEach(h=>{lines.push(`${h.questionNumber}`,h.text,'');});downloadBlob(lines.join('\r\n'),'text/plain;charset=utf-8',`journumbering-history-${new Date().toISOString().slice(0,10)}.txt`);}
+async function importData(file){try{const parsed=JSON.parse(await file.text());state=migrateState(parsed);state.current=null;saveState();alert('データを読み込みました。');showScreen('home');}catch{alert('読み込みに失敗しました。ジャーナンバリングのバックアップファイルを選んでください。');}}
 
-  const prev = state.history.filter(h => h.questionKey === record.questionKey && h.id !== record.id);
-  const accepted = prev.filter(h => h.acceptedAt);
-  const note = document.getElementById('historyNote');
-  if (!prev.length) note.innerHTML = '<strong>この一題は初出です。</strong><br>手帳にそのまま書いても、別の一題を引いてもOK。';
-  else {
-    const recent = prev.slice(-4).reverse().map(h => formatDate(h.shownAt));
-    const acceptedText = accepted.length ? `<br><strong>前回採用：${formatDate(accepted[accepted.length-1].acceptedAt)}</strong>` : '<br>まだ採用されたことはありません。';
-    note.innerHTML = `<strong>この一題は過去に${prev.length}回表示されています。</strong><br>出題日：${recent.join(' / ')}${prev.length>4?' ほか':''}${acceptedText}`;
-  }
-
-  const acceptBtn = document.getElementById('acceptBtn');
-  acceptBtn.classList.toggle('accepted', !!record.acceptedAt);
-  acceptBtn.textContent = record.acceptedAt ? `✓ 今日の一題に決定済み（${record.questionNumber}）` : 'この一題に決める';
-
-  const fav = document.getElementById('favoriteBtn');
-  fav.classList.toggle('active', !!meta.favorite); fav.textContent = meta.favorite ? '★ お気に入り済み' : '☆ お気に入り';
-  const ratingLabels = {good:'👍 よかった',normal:'🙂 ふつう',bad:'↻ 微妙'};
-  document.getElementById('ratingBtn').textContent = meta.rating ? `${ratingLabels[meta.rating]}・再評価` : 'この一題を評価';
-}
-
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id===id));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.screen===id));
-  document.getElementById('addMaterialBtn').classList.toggle('show', id==='materials');
-  if (id==='home') { renderMoods(); renderCurrentCard(); }
-  if (id==='history') renderHistory();
-  if (id==='materials') renderMaterials();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function uniqueLatest(items) {
-  const seen = new Set(); const result=[];
-  for (const item of items) if (!seen.has(item.questionKey)) { seen.add(item.questionKey); result.push(item); }
-  return result;
-}
-
-function renderHistory() {
-  let items = [...state.history].reverse();
-  if (state.historyFilter==='accepted') items = items.filter(h => h.acceptedAt);
-  if (state.historyFilter==='favorite') items = uniqueLatest(items.filter(h => getMeta(h.questionKey).favorite));
-  if (state.historyFilter==='good') items = uniqueLatest(items.filter(h => getMeta(h.questionKey).rating==='good'));
-
-  const q = historySearchQuery.trim().toLowerCase();
-  if (q) items = items.filter(h => {
-    const view = getView(h.viewId);
-    const element = getElement(h.elementId);
-    const haystack = [h.questionNumber,h.text,h.viewId,view?.name,String(h.elementId),`要素${h.elementId}`,element?.name]
-      .filter(Boolean).join(' ').toLowerCase();
-    return haystack.includes(q);
-  });
-
-  const list = document.getElementById('historyList');
-  if (!items.length) { list.innerHTML='<div class="empty">まだ該当する一題がありません。</div>'; return; }
-  list.innerHTML = items.map(item => {
-    const view=getView(item.viewId), meta=getMeta(item.questionKey);
-    const rating = meta.rating==='good'?'👍 よかった':meta.rating==='normal'?'🙂 ふつう':meta.rating==='bad'?'↻ 微妙':'';
-    return `<article class="history-item"><div class="date">${formatDate(item.acceptedAt || item.shownAt,true)}${item.acceptedAt?' ・ 採用':' ・ 表示'}</div><div class="qno">${escapeHtml(item.questionNumber)}</div><div class="text">${escapeHtml(item.text)}</div><div class="chips"><span class="tiny">${escapeHtml(view?.name || item.viewId)}</span>${meta.favorite?'<span class="tiny">★ お気に入り</span>':''}${rating?`<span class="tiny">${rating}</span>`:''}</div><div class="history-actions"><button class="history-action-btn ${meta.favorite?'active':''}" data-history-favorite="${escapeHtml(item.questionKey)}">${meta.favorite?'★ お気に入りを外す':'☆ お気に入り'}</button><button class="history-action-btn" data-history-rating="${escapeHtml(item.questionKey)}">${meta.rating?'一題を再評価':'一題を評価'}</button></div></article>`;
-  }).join('');
-  list.querySelectorAll('[data-history-favorite]').forEach(btn=>btn.addEventListener('click',()=>{
-    const key=btn.dataset.historyFavorite; const meta=getMeta(key); setMeta(key,{favorite:!meta.favorite}); saveState(); renderHistory(); renderCurrentCard();
-  }));
-  list.querySelectorAll('[data-history-rating]').forEach(btn=>btn.addEventListener('click',()=>{
-    ratingTargetKey=btn.dataset.historyRating; ratingDialog.showModal();
-  }));
-}
-
-function renderMaterials() {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab===state.materialTab));
-  document.getElementById('elementsPane').classList.toggle('hidden', state.materialTab!=='elements');
-  document.getElementById('templatesPane').classList.toggle('hidden', state.materialTab!=='templates');
-  renderElements(); renderTemplates();
-}
-
-function renderElements() {
-  const list=document.getElementById('elementList');
-  const typeLabel=id => L.ELEMENT_TYPES.find(t=>t.id===id)?.label || id;
-  list.innerHTML=[...state.elements].sort((a,b)=>a.id-b.id).map(el=>`<article class="element-item"><div class="element-head"><div class="element-main"><div class="element-no">${String(el.id).padStart(2,'0')}</div><div><h3>${escapeHtml(el.name)}${el.builtIn?'':' ・自作'}</h3><p>${escapeHtml(typeLabel(el.type))}</p></div></div><label class="toggle"><input type="checkbox" data-element-toggle="${el.id}" ${el.enabled?'checked':''}><span></span></label></div></article>`).join('');
-  list.querySelectorAll('[data-element-toggle]').forEach(input=>input.addEventListener('change',()=>{
-    const target=getElement(Number(input.dataset.elementToggle)); if(!target)return; target.enabled=input.checked;
-    if(!state.elements.some(e=>e.enabled)){target.enabled=true;alert('要素は最低1つ必要です。');}
-    saveState(); renderElements();
-  }));
-}
-
-function renderTemplates() {
-  const list=document.getElementById('templateList');
-  list.innerHTML=L.VIEWS.map(view=>{
-    const templates=state.templates.filter(t=>t.view===view.id).sort((a,b)=>a.number-b.number);
-    const enabled=templates.filter(t=>t.enabled).length;
-    return `<section class="view-group ${openView===view.id?'open':''}"><button class="view-head" data-view-group="${view.id}"><span><strong>${view.id} ${escapeHtml(view.name)}</strong></span><span class="count">${enabled}/${templates.length}問 ＞</span></button><div class="view-body">${templates.map(t=>`<article class="template-item"><div class="template-head"><div><h3>${String(t.number).padStart(2,'0')} ${escapeHtml(t.name)}${t.builtIn?'':' ・自作'}</h3><p>${escapeHtml(t.text)}</p></div><label class="toggle"><input type="checkbox" data-template-toggle="${t.id}" ${t.enabled?'checked':''}><span></span></label></div><div class="chips"><span class="tiny">${escapeHtml(L.MOODS.find(m=>m.id===t.category)?.label || t.category)}</span></div></article>`).join('')}</div></section>`;
-  }).join('');
-  list.querySelectorAll('[data-view-group]').forEach(btn=>btn.addEventListener('click',()=>{openView=openView===btn.dataset.viewGroup?null:btn.dataset.viewGroup;renderTemplates();}));
-  list.querySelectorAll('[data-template-toggle]').forEach(input=>input.addEventListener('change',()=>{
-    const target=getTemplate(input.dataset.templateToggle); if(!target)return; target.enabled=input.checked;
-    if(!state.templates.some(t=>t.view===target.view && t.enabled)){target.enabled=true;alert('各視点には最低1つの問い方が必要です。');}
-    saveState(); renderTemplates();
-  }));
-}
-
-function nextElementId() { return Math.max(0,...state.elements.map(e=>e.id))+1; }
-function nextTemplateNumber(view) { return Math.max(0,...state.templates.filter(t=>t.view===view).map(t=>Number(t.number)||0))+1; }
-
-function downloadBlob(content, type, filename) {
-  const blob=new Blob([content],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a');
-  a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url);
-}
-function exportData() {
-  downloadBlob(JSON.stringify(state,null,2),'application/json',`journumbering-backup-${new Date().toISOString().slice(0,10)}.json`);
-}
-function exportHistoryText() {
-  const accepted=[...state.history].filter(h=>h.acceptedAt).sort((a,b)=>new Date(a.acceptedAt)-new Date(b.acceptedAt));
-  const favoriteKeys=Object.entries(state.questionMeta).filter(([,m])=>m?.favorite).map(([key])=>key);
-  const favorites=[]; const seen=new Set();
-  [...state.history].reverse().forEach(h=>{ if(favoriteKeys.includes(h.questionKey)&&!seen.has(h.questionKey)){seen.add(h.questionKey);favorites.push(h);} });
-  const lines=['ジャーナンバリング 一題の履歴',`出力日：${formatDate(nowIso())}`,''];
-  lines.push('【採用した一題】');
-  if(!accepted.length) lines.push('まだ採用した一題はありません。');
-  accepted.forEach(h=>{lines.push(`${formatDate(h.acceptedAt)}  ${h.questionNumber}`);lines.push(h.text);lines.push('');});
-  lines.push('【お気に入りの一題】');
-  if(!favorites.length) lines.push('まだお気に入りの一題はありません。');
-  favorites.forEach(h=>{lines.push(`${h.questionNumber}`);lines.push(h.text);lines.push('');});
-  downloadBlob(lines.join('\r\n'),'text/plain;charset=utf-8',`journumbering-history-${new Date().toISOString().slice(0,10)}.txt`);
-}
-async function importData(file) {
-  try { const parsed=JSON.parse(await file.text()); state=migrateState(parsed); state.current=null; saveState(); alert('データを読み込みました。'); showScreen('home'); }
-  catch { alert('読み込みに失敗しました。ジャーナンバリングのバックアップファイルを選んでください。'); }
-}
-
-// 初期フォーム
 L.VIEWS.forEach(v=>{const o=document.createElement('option');o.value=v.id;o.textContent=`${v.id}：${v.name}`;document.getElementById('templateView').appendChild(o);});
-L.ELEMENT_TYPES.forEach(t=>{
-  const a=document.createElement('option');a.value=t.id;a.textContent=t.label;document.getElementById('elementType').appendChild(a);
-  const b=document.createElement('option');b.value=t.id;b.textContent=t.label;document.getElementById('templateType').appendChild(b);
-});
+L.ELEMENT_TYPES.forEach(t=>{const a=document.createElement('option');a.value=t.id;a.textContent=t.label;document.getElementById('elementType').appendChild(a);const b=document.createElement('option');b.value=t.id;b.textContent=t.label;document.getElementById('templateType').appendChild(b);});
+renderMoods();renderCurrentCard();
 
-renderMoods(); renderCurrentCard();
-
-document.getElementById('drawBtn').addEventListener('click',()=>drawQuestion('all'));
-document.getElementById('rerollAll').addEventListener('click',()=>drawQuestion('all'));
-document.getElementById('rerollElement').addEventListener('click',()=>drawQuestion('element'));
-document.getElementById('rerollTemplate').addEventListener('click',()=>drawQuestion('template'));
+document.getElementById('drawBtn').addEventListener('click',()=>drawQuestion('all','initial'));
+document.getElementById('rerollAll').addEventListener('click',()=>drawQuestion('all','reroll_all'));
+document.getElementById('rerollElement').addEventListener('click',()=>drawQuestion('element','reroll_element'));
+document.getElementById('rerollTemplate').addEventListener('click',()=>drawQuestion('template','reroll_template'));
 document.getElementById('backHome').addEventListener('click',()=>showScreen('home'));
-
-document.getElementById('acceptBtn').addEventListener('click',()=>{
-  const record=getCurrentRecord(); if(!record)return;
-  if(!record.acceptedAt) { record.acceptedAt=nowIso(); saveState(); renderQuestion(); renderCurrentCard(); }
-});
-document.getElementById('favoriteBtn').addEventListener('click',()=>{
-  const record=getCurrentRecord();if(!record)return;const meta=getMeta(record.questionKey);setMeta(record.questionKey,{favorite:!meta.favorite});saveState();renderQuestion();
-});
+document.getElementById('acceptBtn').addEventListener('click',()=>{const record=getCurrentRecord();if(!record)return;if(!record.acceptedAt){record.acceptedAt=nowIso();saveState();posthogCapture('question_accepted',{...analyticsQuestionProps(record),reroll_count:totalRerolls(),reroll_all_count:analyticsRerollCounts.all,reroll_element_count:analyticsRerollCounts.element,reroll_template_count:analyticsRerollCounts.template});renderQuestion();renderCurrentCard();}});
+document.getElementById('favoriteBtn').addEventListener('click',()=>{const record=getCurrentRecord();if(!record)return;const meta=getMeta(record.questionKey),nextFavorite=!meta.favorite;setMeta(record.questionKey,{favorite:nextFavorite});saveState();posthogCapture('favorite_toggled',{...analyticsQuestionProps(record),favorite:nextFavorite,source:'question'});renderQuestion();});
 
 const ratingDialog=document.getElementById('ratingDialog');
 document.getElementById('ratingBtn').addEventListener('click',()=>{const r=getCurrentRecord();ratingTargetKey=r?.questionKey||null;ratingDialog.showModal();});
-ratingDialog.querySelectorAll('[data-rating]').forEach(btn=>btn.addEventListener('click',()=>{
-  if(ratingTargetKey){setMeta(ratingTargetKey,{rating:btn.dataset.rating==='clear'?null:btn.dataset.rating});saveState();renderQuestion();renderHistory();}
-  ratingTargetKey=null; ratingDialog.close();
-}));
-document.getElementById('helpBtn').addEventListener('click',()=>{
-  const helpDialog=document.getElementById('helpDialog');
-  helpDialog.showModal();
-  requestAnimationFrame(()=>{
-    helpDialog.scrollTop=0;
-    const body=helpDialog.querySelector('.dialog-body');
-    if(body) body.scrollTop=0;
-  });
-});
+ratingDialog.querySelectorAll('[data-rating]').forEach(btn=>btn.addEventListener('click',()=>{if(ratingTargetKey){const rating=btn.dataset.rating==='clear'?null:btn.dataset.rating;setMeta(ratingTargetKey,{rating});saveState();const record=latestRecordByQuestionKey(ratingTargetKey);posthogCapture('question_rated',{...analyticsQuestionProps(record),rating:rating||'clear'});renderQuestion();renderHistory();}ratingTargetKey=null;ratingDialog.close();}));
+document.getElementById('helpBtn').addEventListener('click',()=>{posthogCapture('help_opened');const helpDialog=document.getElementById('helpDialog');helpDialog.showModal();requestAnimationFrame(()=>{helpDialog.scrollTop=0;const body=helpDialog.querySelector('.dialog-body');if(body)body.scrollTop=0;});});
 
 document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>document.getElementById(btn.dataset.close).close()));
 document.querySelectorAll('.nav-btn').forEach(btn=>btn.addEventListener('click',()=>showScreen(btn.dataset.screen)));
@@ -775,26 +485,14 @@ document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('clic
 document.getElementById('historySearch').addEventListener('input',e=>{historySearchQuery=e.target.value;renderHistory();});
 document.getElementById('clearHistorySearch').addEventListener('click',()=>{historySearchQuery='';document.getElementById('historySearch').value='';renderHistory();document.getElementById('historySearch').focus();});
 document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>{state.materialTab=btn.dataset.tab;saveState();renderMaterials();}));
-
 document.getElementById('addMaterialBtn').addEventListener('click',()=>document.getElementById(state.materialTab==='elements'?'elementDialog':'templateDialog').showModal());
-document.getElementById('elementForm').addEventListener('submit',e=>{
-  e.preventDefault(); const name=document.getElementById('elementName').value.trim(); const type=document.getElementById('elementType').value;
-  if(state.elements.some(x=>x.name===name)){alert('同じ名前の要素があります。');return;}
-  state.elements.push({id:nextElementId(),name,type,enabled:true,builtIn:false});saveState();e.target.reset();document.getElementById('elementDialog').close();renderMaterials();
-});
-document.getElementById('templateForm').addEventListener('submit',e=>{
-  e.preventDefault(); const name=document.getElementById('templateName').value.trim(),view=document.getElementById('templateView').value,category=document.getElementById('templateCategory').value,type=document.getElementById('templateType').value,text=document.getElementById('templateText').value.trim();
-  if(!text.includes('{要素}')){alert('質問文には {要素} を1つ以上入れてください。');return;}
-  state.templates.push({id:`custom-${uid()}`,number:nextTemplateNumber(view),name,view,category,text,allowedTypes:type==='all'?L.ELEMENT_TYPES.map(x=>x.id):[type],enabled:true,builtIn:false});
-  saveState();e.target.reset();document.getElementById('templateDialog').close();renderMaterials();
-});
-
+document.getElementById('elementForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('elementName').value.trim(),type=document.getElementById('elementType').value;if(state.elements.some(x=>x.name===name)){alert('同じ名前の要素があります。');return;}state.elements.push({id:nextElementId(),name,type,enabled:true,builtIn:false});saveState();e.target.reset();document.getElementById('elementDialog').close();renderMaterials();});
+document.getElementById('templateForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('templateName').value.trim(),view=document.getElementById('templateView').value,category=document.getElementById('templateCategory').value,type=document.getElementById('templateType').value,text=document.getElementById('templateText').value.trim();if(!text.includes('{要素}')){alert('質問文には {要素} を1つ以上入れてください。');return;}state.templates.push({id:`custom-${uid()}`,number:nextTemplateNumber(view),name,view,category,text,allowedTypes:type==='all'?L.ELEMENT_TYPES.map(x=>x.id):[type],enabled:true,builtIn:false});saveState();e.target.reset();document.getElementById('templateDialog').close();renderMaterials();});
 document.getElementById('exportBtn').addEventListener('click',exportData);
 document.getElementById('exportTextBtn').addEventListener('click',exportHistoryText);
 document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
 document.getElementById('importFile').addEventListener('change',e=>{const file=e.target.files?.[0];if(file)importData(file);e.target.value='';});
 document.getElementById('resetBtn').addEventListener('click',()=>{if(!confirm('この端末の履歴・お気に入り・自作材料をすべて削除します。元に戻せません。'))return;localStorage.removeItem(STORAGE_KEY);state=L.createDefaultState();openView=null;renderMoods();renderCurrentCard();alert('データを削除しました。');showScreen('home');});
-
 </script>
 </body>
 </html>
